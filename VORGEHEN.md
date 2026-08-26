@@ -32,8 +32,8 @@ einzige HTML-Datei** gebaut (`index.html`). Sie enthält:
 - eine Übersicht der vertretenen Marken (mit Links zu den Herstellern)
 - einen Kontaktbereich mit E-Mail und Telefonnummer
 
-Fotos sind aktuell noch **Platzhalter** – Design und Aufbau stehen, echte
-Bilder können jederzeit ergänzt werden.
+Fotos waren zunächst **Platzhalter** – Design und Aufbau standen zuerst,
+echte Bilder wurden danach ergänzt (siehe Schritt 7).
 
 ## Schritt 3 – Werkzeuge eingerichtet
 
@@ -69,6 +69,24 @@ Wenige Minuten später war die Seite unter
 **https://trappi00.github.io/ralf-traphoener/**
 
 erreichbar.
+
+## Schritt 7 – Modernes Design mit echten Bildern
+
+Die Seite wurde zu einer moderneren Landingpage weiterentwickelt: großes
+Titelbild, ein durchlaufendes Marken-Band und Bildkacheln für jede
+vertretene Marke. Als Platzhalter dienen aktuell lizenzfreie Fotos
+(Unsplash) in einem warmen, stimmigen Stil – sie lassen sich jederzeit
+gegen echte Fotos von Ralf Traphöner oder seinen Ausstellungsräumen
+austauschen.
+
+Zusätzlich wurden zwei feine Detailverbesserungen eingebaut:
+
+- **Mobiles Menü:** Auf dem Smartphone erscheint statt der Navigation ein
+  Hamburger-Symbol; ein Tipp darauf öffnet ein sauberes Dropdown-Menü.
+- **Scroll-Animationen:** Abschnitte wie "Über mich", die Markenkacheln
+  und der Kontaktbereich blenden sanft ein, sobald man beim Scrollen zu
+  ihnen kommt (respektiert dabei die "Bewegung reduzieren"-Einstellung
+  des Betriebssystems).
 
 ## Wie man die Seite später aktualisiert
 

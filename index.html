@@ -84,6 +84,55 @@
 
   nav a.navlink:hover { color: var(--ink); }
 
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 0 auto;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- Scroll reveal ---------- */
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(.22,.61,.36,1), transform 0.8s cubic-bezier(.22,.61,.36,1);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .brand-card[data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+  .brand-card[data-reveal]:nth-child(3) { transition-delay: 0.16s; }
+  .brand-card[data-reveal]:nth-child(4) { transition-delay: 0.24s; }
+
   /* ---------- Hero ---------- */
 
   .hero {
@@ -223,6 +272,11 @@
   @media (prefers-reduced-motion: reduce) {
     .marquee-track { animation: none; }
     html { scroll-behavior: auto; }
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
   }
 
   /* ---------- About ---------- */
@@ -460,8 +514,41 @@
   @media (max-width: 780px) {
     section { padding: 72px 0; }
     .hero { min-height: 92vh; }
-    nav .navlink { display: none; }
     .contact { padding: 44px 28px; border-radius: 20px; }
+
+    .menu-toggle { display: flex; }
+
+    .nav-links {
+      position: absolute;
+      top: 76px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 8px 32px 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-links .navlink {
+      display: block;
+      width: 100%;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-links .btn { margin-top: 12px; }
   }
 </style>
 </head>
@@ -471,9 +558,14 @@
   <div class="wrap">
     <div class="brand">Ralf Traphöner</div>
     <nav>
-      <a class="navlink" href="#ueber-mich">Über mich</a>
-      <a class="navlink" href="#vertretungen">Vertretungen</a>
-      <a class="btn btn-primary" style="padding:10px 22px" href="#kontakt">Kontakt</a>
+      <div class="nav-links" id="navLinks">
+        <a class="navlink" href="#ueber-mich">Über mich</a>
+        <a class="navlink" href="#vertretungen">Vertretungen</a>
+        <a class="btn btn-primary" style="padding:10px 22px" href="#kontakt">Kontakt</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>
@@ -514,10 +606,10 @@
 <section class="about" id="ueber-mich">
   <div class="wrap">
     <div class="grid">
-      <div class="about-image">
+      <div class="about-image" data-reveal>
         <img src="images/about-ambience.jpg" alt="Warm eingerichtetes Wohnzimmer mit Sofa und Pflanzen" loading="lazy">
       </div>
-      <div class="about-text">
+      <div class="about-text" data-reveal>
         <div class="section-eyebrow">Über mich</div>
         <h2>Seit vielen Jahren im Möbelvertrieb zuhause</h2>
         <p>
@@ -550,13 +642,13 @@
 
 <section class="brands" id="vertretungen">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <div class="section-eyebrow">Vertretungen</div>
       <h2>Marken, die ich vertrete</h2>
       <p>Eine sorgfältig ausgewählte Auswahl italienischer und deutscher Möbelhersteller.</p>
     </div>
     <div class="brands-grid">
-      <a class="brand-card" href="https://www.novamobili.it/de" target="_blank" rel="noopener">
+      <a class="brand-card" data-reveal href="https://www.novamobili.it/de" target="_blank" rel="noopener">
         <img src="images/brand-novamobili.jpg" alt="Gepolsterter Sessel von Nova mobili" loading="lazy">
         <div class="brand-card-content">
           <h3>Nova mobili</h3>
@@ -564,7 +656,7 @@
           <span class="visit">Website besuchen →</span>
         </div>
       </a>
-      <a class="brand-card" href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">
+      <a class="brand-card" data-reveal href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">
         <img src="images/brand-cinquanta3.jpg" alt="Farbiger Polstersessel von Cinquanta 3" loading="lazy">
         <div class="brand-card-content">
           <h3>Cinquanta 3</h3>
@@ -572,7 +664,7 @@
           <span class="visit">Website besuchen →</span>
         </div>
       </a>
-      <a class="brand-card" href="https://www.dietsch.de" target="_blank" rel="noopener">
+      <a class="brand-card" data-reveal href="https://www.dietsch.de" target="_blank" rel="noopener">
         <img src="images/brand-dietsch.jpg" alt="Heller, skandinavisch anmutender Wohnraum von Dietsch" loading="lazy">
         <div class="brand-card-content">
           <h3>Dietsch</h3>
@@ -580,7 +672,7 @@
           <span class="visit">Website besuchen →</span>
         </div>
       </a>
-      <a class="brand-card" href="https://www.lavida-moebel.de" target="_blank" rel="noopener">
+      <a class="brand-card" data-reveal href="https://www.lavida-moebel.de" target="_blank" rel="noopener">
         <img src="images/brand-lavida.jpg" alt="Gemütliches Sofa mit warmem Licht von La vida" loading="lazy">
         <div class="brand-card-content">
           <h3>La vida</h3>
@@ -594,7 +686,7 @@
 
 <section class="contact-section" id="kontakt">
   <div class="wrap">
-    <div class="contact">
+    <div class="contact" data-reveal>
       <div class="grid">
         <div>
           <div class="section-eyebrow">Kontakt</div>
@@ -624,6 +716,47 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobiles Menü
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Scroll-Animationen
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
 </script>
 
 </body>
