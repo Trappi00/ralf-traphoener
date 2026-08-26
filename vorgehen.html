@@ -1,0 +1,562 @@
+<title>Wie die Website entstand</title>
+<style>
+  :root {
+    --paper: #f7f4ef;
+    --paper-alt: #efe9e0;
+    --ink: #2b2620;
+    --ink-soft: #6b6357;
+    --ink-faint: #948a78;
+    --brass: #8a7148;
+    --brass-ink: #6e5936;
+    --line: #ddd5c7;
+    --card: #ffffff;
+    --good: #4f7a5c;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1b1815;
+      --paper-alt: #221e18;
+      --ink: #efe9df;
+      --ink-soft: #b5aa96;
+      --ink-faint: #7e7562;
+      --brass: #cda86e;
+      --brass-ink: #e7c891;
+      --line: #3a342a;
+      --card: #221e18;
+      --good: #7fa989;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #1b1815;
+    --paper-alt: #221e18;
+    --ink: #efe9df;
+    --ink-soft: #b5aa96;
+    --ink-faint: #7e7562;
+    --brass: #cda86e;
+    --brass-ink: #e7c891;
+    --line: #3a342a;
+    --card: #221e18;
+    --good: #7fa989;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  a {
+    color: var(--brass-ink);
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 28px 100px;
+  }
+
+  header.top {
+    margin-bottom: 56px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass-ink);
+    margin-bottom: 16px;
+  }
+
+  h1.title {
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.1;
+    margin: 0 0 18px;
+  }
+
+  .dek {
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  /* Spec sheet */
+  .spec {
+    margin-top: 40px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 4px 24px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .spec-row:last-child { border-bottom: none; }
+
+  .spec-row .k {
+    color: var(--ink-faint);
+    flex-shrink: 0;
+  }
+
+  .spec-row .v {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    word-break: break-word;
+  }
+
+  .spec-row .v.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--good);
+    display: inline-block;
+  }
+
+  /* Sections */
+  section.block {
+    margin-top: 64px;
+  }
+
+  h2.section-title {
+    font-size: 1.5rem;
+    margin: 0 0 8px;
+  }
+
+  .section-intro {
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+    max-width: 60ch;
+  }
+
+  /* Steps timeline */
+  .steps {
+    position: relative;
+  }
+
+  .step {
+    position: relative;
+    padding: 0 0 40px 56px;
+    border-left: 1px solid var(--line);
+    margin-left: 19px;
+  }
+  .step:last-child { border-left-color: transparent; padding-bottom: 4px; }
+
+  .step-num {
+    position: absolute;
+    left: -20px;
+    top: -2px;
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    color: var(--brass-ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step h3 {
+    font-size: 1.15rem;
+    margin: 2px 0 8px;
+  }
+
+  .step p {
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .step p.note {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+  }
+
+  .step ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    color: var(--ink-soft);
+  }
+  .step li { margin: 4px 0; }
+  .step li strong { color: var(--ink); font-weight: 600; }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-size: 0.87em;
+    color: var(--ink);
+  }
+
+  /* Update flow */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 28px 0 8px;
+  }
+
+  .flow-step {
+    flex: 1 1 140px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 16px;
+  }
+
+  .flow-step .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--brass-ink);
+    margin-bottom: 8px;
+  }
+
+  .flow-step p {
+    margin: 0;
+    font-size: 0.92rem;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    color: var(--ink-faint);
+    font-size: 1.1rem;
+    flex: 0 0 auto;
+  }
+
+  /* Glossary */
+  .glossary {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .g-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    background: var(--card);
+    padding: 16px 20px;
+  }
+
+  .g-row dt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+    color: var(--brass-ink);
+    font-weight: 500;
+  }
+
+  .g-row dd {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+  }
+
+  /* Links footer */
+  .links {
+    margin-top: 64px;
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 36px 32px;
+  }
+  :root[data-theme="dark"] .links,
+  @media (prefers-color-scheme: dark) { }
+
+  .links h2 {
+    color: var(--paper);
+    font-size: 1.3rem;
+    margin: 0 0 20px;
+  }
+
+  .link-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .link-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: baseline;
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .link-list a:hover { background: rgba(255,255,255,0.11); }
+  .link-list a .label { color: rgba(247,244,239,0.62); font-size: 0.85rem; }
+  .link-list a .url { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
+
+  footer.foot {
+    margin-top: 48px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 560px) {
+    .spec-row { flex-direction: column; gap: 4px; }
+    .spec-row .v { text-align: left; }
+    .g-row { grid-template-columns: 1fr; gap: 4px; }
+    .page { padding: 48px 20px 72px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="page">
+
+  <header class="top">
+    <div class="eyebrow">Projektdokumentation</div>
+    <h1 class="title">Wie die Website entstand</h1>
+    <p class="dek">
+      Eine Schritt-für-Schritt-Erklärung, wie die Website von Ralf Traphöner
+      gebaut und veröffentlicht wurde – geschrieben für alle, die keine
+      Programmierer sind.
+    </p>
+
+    <div class="spec">
+      <div class="spec-row">
+        <span class="k">Live-Website</span>
+        <span class="v mono"><a href="https://trappi00.github.io/ralf-traphoener/">trappi00.github.io/ralf-traphoener</a></span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Status</span>
+        <span class="v tag"><span class="dot"></span>Veröffentlicht</span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Kosten</span>
+        <span class="v">0 € / Monat</span>
+      </div>
+      <div class="spec-row">
+        <span class="k">Projektdateien</span>
+        <span class="v mono"><a href="https://github.com/Trappi00/ralf-traphoener">github.com/Trappi00/ralf-traphoener</a></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="block">
+    <h2 class="section-title">Der Weg zur Live-Website</h2>
+    <p class="section-intro">
+      Sechs Schritte, in dieser Reihenfolge durchgeführt – von den ersten
+      Inhalten bis zur öffentlich erreichbaren Seite.
+    </p>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Inhalte gesammelt</h3>
+        <p>
+          Ausgangspunkt war eine bestehende, einfache Visitenkarten-Seite.
+          Daraus wurden Name, Tätigkeit, Kontaktdaten und die vertretenen
+          Möbelmarken übernommen.
+        </p>
+        <ul>
+          <li><strong>Ralf Traphöner</strong> — Handelsagentur für Möbel</li>
+          <li>Vertretungen: Nova mobili, Cinquanta 3, Dietsch, La vida</li>
+          <li>Kontakt: E-Mail und Telefonnummer</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Website gestaltet</h3>
+        <p>
+          Aus den Inhalten entstand eine neue, eigenständige Website als
+          eine einzelne Datei namens <code>index.html</code> — mit
+          Startseite, Vorstellung, Markenübersicht und Kontaktbereich.
+        </p>
+        <p class="note">Fotos sind derzeit noch Platzhalter und können jederzeit ergänzt werden.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Werkzeuge eingerichtet</h3>
+        <p>
+          Zwei kleine Programme wurden auf dem Rechner vorbereitet, um die
+          Datei später veröffentlichen zu können.
+        </p>
+        <ul>
+          <li><strong>Git</strong> — verfolgt Änderungen an Dateien nach</li>
+          <li><strong>GitHub CLI</strong> — verbindet den Rechner mit dem Online-Dienst GitHub</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Bei GitHub angemeldet</h3>
+        <p>
+          GitHub ist ein kostenloser Online-Dienst zum Speichern und
+          Veröffentlichen von Dateien. Die Anmeldung lief über einen
+          einmaligen Code, den GitHub im Browser bestätigen ließ — ohne
+          dass Zugangsdaten irgendwo eingetippt werden mussten.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">05</div>
+        <h3>Projekt hochgeladen</h3>
+        <p>
+          Ein <strong>Repository</strong> — ein Online-Ordner für die
+          Projektdateien — wurde unter dem Namen
+          <code>ralf-traphoener</code> angelegt. Die Website-Datei wurde
+          dorthin übertragen.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">06</div>
+        <h3>Seite veröffentlicht</h3>
+        <p>
+          Über die Funktion <strong>GitHub Pages</strong> wurde festgelegt,
+          dass der Inhalt des Repositorys als echte Website im Internet
+          erscheint. Wenige Minuten später war sie erreichbar.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="section-title">Wie man die Seite später aktualisiert</h2>
+    <p class="section-intro">
+      Jede künftige Änderung — neue Fotos, andere Texte, weitere Marken —
+      folgt demselben, immer gleichen Ablauf.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="n">Schritt A</div>
+        <p>Datei bearbeiten — Texte, Bilder oder Kontaktdaten anpassen</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="n">Schritt B</div>
+        <p>Änderung speichern — mit kurzer Beschreibung, was sich geändert hat</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="n">Schritt C</div>
+        <p>Zu GitHub hochladen — die Live-Seite aktualisiert sich automatisch</p>
+      </div>
+    </div>
+    <p class="section-intro" style="margin-top: 20px; margin-bottom: 0;">
+      Rund eine Minute nach dem Hochladen ist die Änderung live sichtbar.
+    </p>
+  </section>
+
+  <section class="block">
+    <h2 class="section-title">Kurzes Glossar</h2>
+    <p class="section-intro">Die wichtigsten Begriffe, einfach erklärt.</p>
+
+    <dl class="glossary">
+      <div class="g-row">
+        <dt>Repository</dt>
+        <dd>Ein Online-Ordner für Projektdateien, inklusive aller früheren Versionen.</dd>
+      </div>
+      <div class="g-row">
+        <dt>Git</dt>
+        <dd>Das Werkzeug, das Änderungen an Dateien nachvollziehbar speichert.</dd>
+      </div>
+      <div class="g-row">
+        <dt>Commit</dt>
+        <dd>Ein gespeicherter Änderungsstand mit kurzer Beschreibung, was sich geändert hat.</dd>
+      </div>
+      <div class="g-row">
+        <dt>Push</dt>
+        <dd>Änderungen vom eigenen Rechner zu GitHub hochladen.</dd>
+      </div>
+      <div class="g-row">
+        <dt>GitHub Pages</dt>
+        <dd>Kostenloser Dienst, der ein Repository automatisch als Website veröffentlicht.</dd>
+      </div>
+      <div class="g-row">
+        <dt>Hosting</dt>
+        <dd>Der Vorgang, eine Website dauerhaft und öffentlich im Internet erreichbar zu machen.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="links">
+    <h2>Wichtige Links</h2>
+    <ul class="link-list">
+      <li>
+        <a href="https://trappi00.github.io/ralf-traphoener/" target="_blank" rel="noopener">
+          <span class="label">Live-Website</span>
+          <span class="url">trappi00.github.io/ralf-traphoener</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/Trappi00/ralf-traphoener" target="_blank" rel="noopener">
+          <span class="label">Projektdateien</span>
+          <span class="url">github.com/Trappi00/ralf-traphoener</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <footer class="foot">Dokumentiert für Ralf Traphöner · Handelsagentur für Möbel</footer>
+
+</div>
