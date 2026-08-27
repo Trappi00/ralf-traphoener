@@ -103,6 +103,31 @@ Nach Rückmeldung von Ralf wurden zwei Anpassungen vorgenommen:
   "Über mich"-Bereich (z.B. Anzahl vertretener Marken), die beim Scrollen
   hochzählen.
 
+## Schritt 9 – Rechtliche Pflichtangaben ergänzt
+
+Da die Seite von einem gewerblichen Handelsvertreter betrieben wird, gelten
+rechtliche Mindestanforderungen. Ergänzt wurden:
+
+- **Impressum** (`impressum.html`) gemäß § 5 DDG
+- **Datenschutzerklärung** (`datenschutz.html`) gemäß Art. 13 DSGVO
+- Beide Seiten sind im Footer der Startseite verlinkt
+
+Außerdem wurde ein verstecktes DSGVO-Risiko behoben: Die Seite lud zuvor
+Schriftarten direkt von Google-Servern, wodurch die IP-Adresse jedes
+Besuchers ohne Einwilligung an Google (USA) übertragen wurde – ein in
+Deutschland vielfach abgemahntes Problem. Die Schriften werden jetzt
+**selbst gehostet** (`fonts/`-Ordner), es findet keine Verbindung zu Google
+mehr statt.
+
+**Wichtig – noch offen:** Im Impressum fehlen die vollständige Postanschrift
+(Straße, PLZ, Ort) sowie ggf. die Umsatzsteuer-Identifikationsnummer. Diese
+sind gesetzlich zwingend erforderlich und aktuell als gelb markierte
+Platzhalter im Impressum sichtbar. Die Seite sollte nicht dauerhaft ohne
+diese Angaben online bleiben, da ein unvollständiges Impressum abmahnfähig
+ist. Rechtssicherheit im Detail sollte im Zweifel mit einem Anwalt oder
+Steuerberater abgestimmt werden – diese Umsetzung ersetzt keine
+Rechtsberatung.
+
 ## Wie man die Seite später aktualisiert
 
 Jede Änderung läuft nach demselben Prinzip:
