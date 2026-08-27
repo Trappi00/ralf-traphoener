@@ -167,6 +167,14 @@
     height: 100%;
     object-fit: cover;
     object-position: center 62%;
+    transform-origin: center 62%;
+    animation: kenburns 24s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes kenburns {
+    from { transform: scale(1.06); }
+    to { transform: scale(1.16); }
   }
 
   .hero-media::after {
@@ -218,6 +226,20 @@
     flex-wrap: wrap;
   }
 
+  .hero-content .eyebrow,
+  .hero-content h1,
+  .hero-content p.lead,
+  .hero-content .cta-row {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s cubic-bezier(.22,.61,.36,1), transform 0.9s cubic-bezier(.22,.61,.36,1);
+  }
+
+  body.is-loaded .hero-content .eyebrow { opacity: 1; transform: none; transition-delay: 0.1s; }
+  body.is-loaded .hero-content h1 { opacity: 1; transform: none; transition-delay: 0.22s; }
+  body.is-loaded .hero-content p.lead { opacity: 1; transform: none; transition-delay: 0.36s; }
+  body.is-loaded .hero-content .cta-row { opacity: 1; transform: none; transition-delay: 0.48s; }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -227,7 +249,7 @@
     font-size: 0.95rem;
     font-weight: 500;
     text-decoration: none;
-    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s cubic-bezier(.22,.61,.36,1), background 0.2s ease, box-shadow 0.2s ease;
   }
 
   .btn-primary {
@@ -291,6 +313,16 @@
       transform: none !important;
       transition: none !important;
     }
+    .hero-media img { animation: none; }
+    .hero-content .eyebrow,
+    .hero-content h1,
+    .hero-content p.lead,
+    .hero-content .cta-row {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .brand-card { transition: none !important; }
   }
 
   /* ---------- About ---------- */
@@ -382,6 +414,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    perspective: 1200px;
   }
 
   .brand-card {
@@ -393,6 +426,9 @@
     color: #f7f4ef;
     display: block;
     border: 1px solid var(--line);
+    transition: transform 0.2s cubic-bezier(.22,.61,.36,1);
+    transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
+    will-change: transform;
   }
 
   .brand-card img {
@@ -891,6 +927,62 @@
     counters.forEach(el => countIo.observe(el));
   } else {
     counters.forEach(el => { el.textContent = el.getAttribute('data-count-to'); });
+  }
+
+  // Hero-Eintrittsanimation
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => document.body.classList.add('is-loaded'));
+  });
+
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Magnet-Buttons
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+      let bounds;
+      btn.addEventListener('mouseenter', () => { bounds = btn.getBoundingClientRect(); });
+      btn.addEventListener('mousemove', (e) => {
+        bounds = bounds || btn.getBoundingClientRect();
+        const relX = e.clientX - bounds.left - bounds.width / 2;
+        const relY = e.clientY - bounds.top - bounds.height / 2;
+        btn.style.transform = `translate(${relX * 0.25}px, ${relY * 0.35}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
+
+  // Karten-Tilt
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.brand-card').forEach(card => {
+      let bounds;
+      card.addEventListener('mouseenter', () => { bounds = card.getBoundingClientRect(); });
+      card.addEventListener('mousemove', (e) => {
+        bounds = bounds || card.getBoundingClientRect();
+        const px = (e.clientX - bounds.left) / bounds.width;
+        const py = (e.clientY - bounds.top) / bounds.height;
+        const rotateY = (px - 0.5) * 8;
+        const rotateX = (0.5 - py) * 8;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  }
+
+  // Hero-Parallax
+  const heroMedia = document.querySelector('.hero-media');
+  if (heroMedia && !reduceMotion) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const offset = Math.min(window.scrollY, 300);
+        heroMedia.style.transform = `translateY(${offset * 0.1}px)`;
+        ticking = false;
+      });
+    }, { passive: true });
   }
 </script>
 
