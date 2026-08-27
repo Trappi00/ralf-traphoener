@@ -88,6 +88,21 @@ Zusätzlich wurden zwei feine Detailverbesserungen eingebaut:
   ihnen kommt (respektiert dabei die "Bewegung reduzieren"-Einstellung
   des Betriebssystems).
 
+## Schritt 8 – Design-Feedback umgesetzt
+
+Nach Rückmeldung von Ralf wurden zwei Anpassungen vorgenommen:
+
+- **Markenstruktur korrigiert:** Nova mobili und Cinquanta 3 sind Kollektionen
+  der **Battistella Company** (bestätigt über die offiziellen Websites der
+  beiden Marken). Sie werden jetzt gemeinsam als eine Marke "Battistella
+  Company" mit zwei verlinkten Kollektionen dargestellt, statt als zwei
+  getrennte Marken.
+- **Dunkles, moodiges Design:** Auf Wunsch wurde die Seite stilistisch an
+  [miedl.at](https://www.miedl.at) angelehnt (nicht kopiert) – dunkler
+  Hintergrund, helle/goldene Akzentfarbe, sowie animierte Zahlen im
+  "Über mich"-Bereich (z.B. Anzahl vertretener Marken), die beim Scrollen
+  hochzählen.
+
 ## Wie man die Seite später aktualisiert
 
 Jede Änderung läuft nach demselben Prinzip:
