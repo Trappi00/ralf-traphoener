@@ -4,20 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ralf Traphöner – Handelsagentur für Möbel</title>
-<meta name="description" content="Ralf Traphöner – Handelsagentur für Möbel. Vertretungen: Nova mobili, Cinquanta 3, Dietsch, La vida.">
+<meta name="description" content="Ralf Traphöner – Handelsagentur für Möbel. Vertretungen: Battistella Company (Nova mobili, Cinquanta 3), Dietsch, La vida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f4ef;
-    --bg-alt: #efe9e0;
-    --ink: #2b2620;
-    --ink-soft: #6b6357;
-    --accent: #8a7148;
-    --accent-ink: #6e5936;
-    --line: #ddd5c7;
-    --card: #ffffff;
+    --bg: #131210;
+    --bg-alt: #1b1916;
+    --panel-deep: #0c0b0a;
+    --ink: #f3efe6;
+    --ink-soft: #b2a99b;
+    --accent: #c9a668;
+    --accent-ink: #e3c891;
+    --line: #34302a;
+    --card: #1b1916;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,7 +52,7 @@
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(247, 244, 239, 0.85);
+    background: rgba(19, 18, 16, 0.78);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
@@ -129,9 +130,8 @@
     transform: none;
   }
 
-  .brand-card[data-reveal]:nth-child(2) { transition-delay: 0.08s; }
-  .brand-card[data-reveal]:nth-child(3) { transition-delay: 0.16s; }
-  .brand-card[data-reveal]:nth-child(4) { transition-delay: 0.24s; }
+  .brand-card[data-reveal]:nth-child(2) { transition-delay: 0.1s; }
+  .brand-card[data-reveal]:nth-child(3) { transition-delay: 0.2s; }
 
   /* ---------- Hero ---------- */
 
@@ -183,7 +183,7 @@
     margin-bottom: 18px;
   }
 
-  .hero .eyebrow { color: #e7d9b8; }
+  .hero .eyebrow { color: var(--accent-ink); }
 
   .hero h1 {
     font-size: clamp(2.6rem, 5.2vw, 4.2rem);
@@ -218,8 +218,8 @@
   }
 
   .btn-primary {
-    background: #f7f4ef;
-    color: #2b2620;
+    background: var(--ink);
+    color: var(--panel-deep);
   }
 
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.25); }
@@ -235,10 +235,11 @@
   /* ---------- Marquee strip ---------- */
 
   .marquee-strip {
-    background: var(--ink);
-    color: #efe9de;
+    background: var(--panel-deep);
+    color: var(--ink-soft);
     padding: 18px 0;
     overflow: hidden;
+    border-block: 1px solid var(--line);
   }
 
   .marquee-track {
@@ -378,6 +379,7 @@
     text-decoration: none;
     color: #f7f4ef;
     display: block;
+    border: 1px solid var(--line);
   }
 
   .brand-card img {
@@ -437,18 +439,88 @@
     transform: translateY(0);
   }
 
+  .brand-card--featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 9;
+  }
+
+  .split-media {
+    position: absolute;
+    inset: 0;
+    display: flex;
+  }
+
+  .split-media img {
+    position: static;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .brand-card--featured:hover .split-media img { transform: scale(1.06); }
+
+  .brand-card-content .kicker {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    color: #d8cba6;
+    margin-bottom: 6px;
+  }
+
+  .collection-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .collection-links a {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #2b2620;
+    background: rgba(247, 244, 239, 0.92);
+    padding: 9px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .collection-links a:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
+  .brand-parent-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+  }
+
+  .brand-parent-link:hover h3 {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  @media (max-width: 780px) {
+    .brand-card--featured { aspect-ratio: 4 / 5; }
+  }
+
   /* ---------- Contact ---------- */
 
   .contact-section { padding-top: 0; }
 
   .contact {
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--panel-deep);
+    color: var(--ink);
+    border: 1px solid var(--line);
     border-radius: 28px;
     padding: 72px 56px;
     background-image:
-      radial-gradient(circle at 15% 20%, rgba(138, 113, 72, 0.35), transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(138, 113, 72, 0.22), transparent 50%);
+      radial-gradient(circle at 15% 20%, rgba(201, 166, 104, 0.16), transparent 45%),
+      radial-gradient(circle at 85% 85%, rgba(201, 166, 104, 0.1), transparent 50%);
   }
 
   .contact .grid {
@@ -458,7 +530,7 @@
     align-items: center;
   }
 
-  .contact .section-eyebrow { color: #cbb98d; }
+  .contact .section-eyebrow { color: var(--accent-ink); }
 
   .contact h2 {
     font-size: clamp(1.9rem, 3.2vw, 2.4rem);
@@ -592,12 +664,10 @@
 
 <div class="marquee-strip">
   <div class="marquee-track">
-    <span>Nova mobili</span>
-    <span>Cinquanta 3</span>
+    <span>Battistella Company</span>
     <span>Dietsch</span>
     <span>La vida</span>
-    <span>Nova mobili</span>
-    <span>Cinquanta 3</span>
+    <span>Battistella Company</span>
     <span>Dietsch</span>
     <span>La vida</span>
   </div>
@@ -623,16 +693,16 @@
         </p>
         <div class="stats">
           <div class="stat">
-            <strong>4</strong>
+            <strong data-count-to="3">0</strong>
             <span>Vertretene Marken</span>
+          </div>
+          <div class="stat">
+            <strong data-count-to="2">0</strong>
+            <span>Herkunftsländer</span>
           </div>
           <div class="stat">
             <strong>[X]</strong>
             <span>Jahre Erfahrung</span>
-          </div>
-          <div class="stat">
-            <strong>[Region]</strong>
-            <span>Vertretungsgebiet</span>
           </div>
         </div>
       </div>
@@ -648,22 +718,23 @@
       <p>Eine sorgfältig ausgewählte Auswahl italienischer und deutscher Möbelhersteller.</p>
     </div>
     <div class="brands-grid">
-      <a class="brand-card" data-reveal href="https://www.novamobili.it/de" target="_blank" rel="noopener">
-        <img src="images/brand-novamobili.jpg" alt="Gepolsterter Sessel von Nova mobili" loading="lazy">
-        <div class="brand-card-content">
-          <h3>Nova mobili</h3>
-          <p>Italienisches Design für Wohn- und Schlafräume</p>
-          <span class="visit">Website besuchen →</span>
+      <div class="brand-card brand-card--featured" data-reveal>
+        <div class="split-media">
+          <img src="images/brand-novamobili.jpg" alt="Sessel aus der Kollektion Nova mobili" loading="lazy">
+          <img src="images/brand-cinquanta3.jpg" alt="Sessel aus der Kollektion Cinquanta 3" loading="lazy">
         </div>
-      </a>
-      <a class="brand-card" data-reveal href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">
-        <img src="images/brand-cinquanta3.jpg" alt="Farbiger Polstersessel von Cinquanta 3" loading="lazy">
         <div class="brand-card-content">
-          <h3>Cinquanta 3</h3>
-          <p>Polstermöbel mit italienischer Handwerkskunst</p>
-          <span class="visit">Website besuchen →</span>
+          <span class="kicker">Italienische Möbelmanufaktur</span>
+          <a class="brand-parent-link" href="https://www.battistellacompany.it/" target="_blank" rel="noopener">
+            <h3>Battistella Company</h3>
+          </a>
+          <p>Mit den Kollektionen Nova mobili und Cinquanta 3</p>
+          <div class="collection-links">
+            <a href="https://www.novamobili.it/de" target="_blank" rel="noopener">Nova mobili →</a>
+            <a href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">Cinquanta 3 →</a>
+          </div>
         </div>
-      </a>
+      </div>
       <a class="brand-card" data-reveal href="https://www.dietsch.de" target="_blank" rel="noopener">
         <img src="images/brand-dietsch.jpg" alt="Heller, skandinavisch anmutender Wohnraum von Dietsch" loading="lazy">
         <div class="brand-card-content">
@@ -756,6 +827,37 @@
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Zahlen-Animation
+  const counters = document.querySelectorAll('[data-count-to]');
+
+  function animateCount(el) {
+    const target = parseInt(el.getAttribute('data-count-to'), 10);
+    if (reduceMotion) { el.textContent = target; return; }
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if ('IntersectionObserver' in window && counters.length) {
+    const countIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(el => countIo.observe(el));
+  } else {
+    counters.forEach(el => { el.textContent = el.getAttribute('data-count-to'); });
   }
 </script>
 
