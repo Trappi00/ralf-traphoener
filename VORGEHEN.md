@@ -128,6 +128,43 @@ ist. Rechtssicherheit im Detail sollte im Zweifel mit einem Anwalt oder
 Steuerberater abgestimmt werden – diese Umsetzung ersetzt keine
 Rechtsberatung.
 
+## Schritt 10 – Umsetzung des Konzepts (Skizze)
+
+Auf Basis der handschriftlichen Konzeptskizze wurde die Seite neu aufgebaut:
+
+- **Name:** „Möbelagentur Ralf Traphöner" (statt „Möbel Handelsagentur")
+- **Claim:** „Aus Möbeln wird Zuhause." (statt „Einrichten mit Leidenschaft")
+- **Über mich:** über 30 Jahre Erfahrung, Vertretungsgebiet NRW und angrenzend
+- **Neu – Messen:** eigener Abschnitt, nach Jahren gruppiert, jede Messe verlinkt
+- **Neu – Kataloge:** Karten je Haus mit Link in den Download-Bereich des Herstellers
+  (Vorbild: miedl.at)
+- **Bilder:** echte Hersteller-Fotos statt lizenzfreier Platzhalter
+
+### Recherchierte Fakten (überprüft an der Quelle)
+
+- **Salone del Mobile.Milano 2027: 13.–18. April 2027**, Fiera Milano (Rho) –
+  bestätigt auf salonemilano.it
+- Novamobili und Cinquanta3 gehören beide zur **Battistella Company** –
+  bestätigt in den Impressen beider Hersteller-Websites
+- **Dietsch** fertigt Polstermöbel (Sofas, Sessel); **La vida** Esszimmermöbel
+  (Stühle, Tische, Bänke, Relaxsessel) – die früheren Beschreibungen auf der
+  Seite waren zu unscharf und wurden korrigiert
+- Katalog-Links: Novamobili, Cinquanta3 und Dietsch haben offene
+  Download-Bereiche; La vida hat keinen Katalog-Download, dort wird auf das
+  Online-Sortiment verlinkt
+
+### Offen / noch zu ergänzen
+
+- **Impressum:** Postanschrift und ggf. USt-IdNr. fehlen weiterhin (Pflichtangabe)
+- **Messen:** Die regionalen Verbandsmessen 2026/2027 sind als Platzhalter
+  angelegt – Termine, Orte und Links müssen noch eingetragen werden
+- **Showroom-Termin 11.09.2026** stammt aus der Konzeptskizze und sollte
+  gegengeprüft werden
+- **Bildrechte:** Die verwendeten Fotos stammen von den Herstellern und sind
+  urheberrechtlich geschützt. Die Nutzung sollte mit Battistella, Dietsch und
+  La vida abgestimmt sein – idealerweise über die Händlerportale, in denen
+  die Hersteller offizielles Bildmaterial bereitstellen.
+
 ## Wie man die Seite später aktualisiert
 
 Jede Änderung läuft nach demselben Prinzip:
