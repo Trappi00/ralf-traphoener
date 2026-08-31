@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ralf Traphöner – Handelsagentur für Möbel</title>
-<meta name="description" content="Ralf Traphöner – Handelsagentur für Möbel. Vertretungen: Battistella Company (Nova mobili, Cinquanta 3), Dietsch, La vida.">
+<title>Möbelagentur Ralf Traphöner – Aus Möbeln wird Zuhause</title>
+<meta name="description" content="Möbelagentur Ralf Traphöner – seit über 30 Jahren Handelsvertretung für hochwertige Möbel in NRW und angrenzenden Regionen. Vertretungen: Battistella Company (Novamobili, Cinquanta3), Dietsch, La vida.">
+<meta property="og:title" content="Möbelagentur Ralf Traphöner">
+<meta property="og:description" content="Aus Möbeln wird Zuhause. Handelsvertretung für hochwertige Möbel in NRW.">
+<meta property="og:type" content="website">
 <style>
+  /* ===== Schriften (selbst gehostet, kein Google-Fonts-Aufruf) ===== */
   @font-face {
     font-family: 'Fraunces';
     font-style: normal;
@@ -13,7 +17,6 @@
     font-display: swap;
     src: url('fonts/fraunces-variable-latin.woff2') format('woff2');
   }
-
   @font-face {
     font-family: 'Inter';
     font-style: normal;
@@ -22,96 +25,120 @@
     src: url('fonts/inter-variable-latin.woff2') format('woff2');
   }
 
+  /* ===== Farbtokens ===== */
   :root {
     --bg: #131210;
-    --bg-alt: #1b1916;
+    --bg-alt: #1a1815;
+    --panel: #201d19;
     --panel-deep: #0c0b0a;
     --ink: #f3efe6;
     --ink-soft: #b2a99b;
+    --ink-faint: #7d7466;
     --accent: #c9a668;
     --accent-ink: #e3c891;
     --line: #34302a;
-    --card: #1b1916;
+    --line-soft: #262320;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.6;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   h1, h2, h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Fraunces', Georgia, serif;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
 
   a { color: inherit; }
   img { display: block; max-width: 100%; }
 
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
   .wrap {
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 32px;
   }
 
+  /* ===== Kopfzeile ===== */
   header {
     position: sticky;
     top: 0;
-    z-index: 20;
-    background: rgba(19, 18, 16, 0.78);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    z-index: 40;
+    background: rgba(19, 18, 16, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
   }
 
   header .wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 76px;
+    height: 80px;
   }
 
   .brand {
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    font-size: 0.95rem;
-  }
-
-  nav a.navlink {
     text-decoration: none;
-    color: var(--ink-soft);
-    transition: color 0.2s;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
   }
 
-  nav a.navlink:hover { color: var(--ink); }
+  .brand-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .brand-sub {
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 3px;
+  }
+
+  nav { display: flex; align-items: center; gap: 8px; }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 30px;
   }
+
+  .nav-links .navlink {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links .navlink:hover { color: var(--ink); }
 
   .menu-toggle {
     display: none;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
+    width: 42px;
+    height: 42px;
     background: none;
     border: none;
     cursor: pointer;
@@ -130,101 +157,582 @@
   .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ---------- Scroll reveal ---------- */
-
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s cubic-bezier(.22,.61,.36,1), transform 0.8s cubic-bezier(.22,.61,.36,1);
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.25s cubic-bezier(.22,.61,.36,1), background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
-  [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
+  .btn-primary { background: var(--ink); color: var(--panel-deep); }
+  .btn-primary:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
+
+  .btn-secondary {
+    background: rgba(243, 239, 230, 0.06);
+    color: var(--ink);
+    border: 1px solid rgba(243, 239, 230, 0.38);
   }
+  .btn-secondary:hover { background: rgba(243, 239, 230, 0.14); }
 
-  .brand-card[data-reveal]:nth-child(2) { transition-delay: 0.1s; }
-  .brand-card[data-reveal]:nth-child(3) { transition-delay: 0.2s; }
+  .btn-sm { padding: 10px 22px; font-size: 0.88rem; }
 
-  /* ---------- Hero ---------- */
-
+  /* ===== Hero ===== */
   .hero {
     position: relative;
-    min-height: 88vh;
+    min-height: 90vh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
   }
 
-  .hero-media {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
+  .hero-media { position: absolute; inset: 0; z-index: 0; }
 
   .hero-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 62%;
-    transform-origin: center 62%;
-    animation: kenburns 24s ease-in-out infinite alternate;
+    object-position: center 55%;
+    animation: kenburns 26s ease-in-out infinite alternate;
     will-change: transform;
   }
 
   @keyframes kenburns {
-    from { transform: scale(1.06); }
-    to { transform: scale(1.16); }
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.15); }
   }
 
   .hero-media::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-      rgba(30, 26, 20, 0.55) 0%,
-      rgba(30, 26, 20, 0.15) 32%,
-      rgba(30, 26, 20, 0.25) 65%,
-      rgba(30, 26, 20, 0.86) 100%);
+    background:
+      /* seitlicher Schleier, damit der linksbündige Text trägt */
+      linear-gradient(100deg,
+        rgba(12, 11, 10, 0.92) 0%,
+        rgba(12, 11, 10, 0.78) 28%,
+        rgba(12, 11, 10, 0.42) 55%,
+        rgba(12, 11, 10, 0.16) 78%,
+        rgba(12, 11, 10, 0.05) 100%),
+      /* vertikale Fassung für Kopfzeile und Übergang zum Laufband */
+      linear-gradient(180deg,
+        rgba(12, 11, 10, 0.72) 0%,
+        rgba(12, 11, 10, 0.20) 26%,
+        rgba(12, 11, 10, 0.30) 60%,
+        rgba(12, 11, 10, 0.90) 100%);
   }
 
   .hero-content {
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 64px 0 72px;
-    color: #f7f4ef;
+    padding: 80px 0 84px;
   }
 
   .eyebrow {
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.78rem;
+    letter-spacing: 0.19em;
+    font-size: 0.74rem;
     font-weight: 600;
-    margin-bottom: 18px;
+    color: var(--accent-ink);
+    margin-bottom: 20px;
   }
 
-  .hero .eyebrow { color: var(--accent-ink); }
-
   .hero h1 {
-    font-size: clamp(2.6rem, 5.2vw, 4.2rem);
-    line-height: 1.06;
-    margin-bottom: 22px;
-    max-width: 16ch;
+    font-size: clamp(2.8rem, 6.4vw, 5rem);
+    line-height: 1.02;
+    margin-bottom: 24px;
+    max-width: 13ch;
   }
 
   .hero p.lead {
-    font-size: 1.15rem;
-    color: #efe9de;
-    max-width: 46ch;
-    margin-bottom: 36px;
+    font-size: 1.13rem;
+    color: #e3ddd1;
+    max-width: 48ch;
+    margin-bottom: 38px;
   }
 
-  .cta-row {
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ===== Laufband ===== */
+  .marquee-strip {
+    background: var(--panel-deep);
+    padding: 20px 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .marquee-track {
     display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scroll-left 30s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track span {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.02rem;
+    color: var(--ink-faint);
+    display: inline-flex;
+    align-items: center;
     gap: 14px;
+  }
+
+  .marquee-track span::after {
+    content: "◆";
+    font-size: 0.44rem;
+    color: var(--accent);
+    opacity: 0.75;
+  }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ===== Abschnitte ===== */
+  section { padding: 108px 0; }
+
+  .section-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.19em;
+    font-size: 0.74rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .section-head {
+    max-width: 660px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    margin-bottom: 16px;
+  }
+
+  .section-head p { color: var(--ink-soft); font-size: 1.04rem; }
+
+  /* ===== Über mich ===== */
+  .about { background: var(--bg-alt); }
+
+  .about .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-image {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+  }
+
+  .about-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .about-text h2 {
+    font-size: clamp(1.85rem, 3.3vw, 2.5rem);
+    margin-bottom: 22px;
+  }
+
+  .about-text p {
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    max-width: 54ch;
+  }
+
+  .stats {
+    display: flex;
+    gap: 44px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 2.1rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+
+  .stat span {
+    color: var(--ink-faint);
+    font-size: 0.84rem;
+  }
+
+  /* ===== Messen ===== */
+  .fairs { background: var(--bg); }
+
+  .fair-year {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 44px;
+  }
+
+  .fair-year-label {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 2.4rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    position: sticky;
+    top: 110px;
+  }
+
+  .fair-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .fair {
+    display: grid;
+    grid-template-columns: 92px 1fr auto;
+    gap: 26px;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 26px;
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(.22,.61,.36,1);
+  }
+
+  a.fair:hover {
+    border-color: var(--accent);
+    background: #26221c;
+    transform: translateX(4px);
+  }
+
+  .fair-date {
+    text-align: center;
+    border-right: 1px solid var(--line);
+    padding-right: 22px;
+  }
+
+  .fair-date .d {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.32rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+  }
+
+  .fair-date .m {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  .fair-body h3 {
+    font-size: 1.14rem;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
   }
+
+  .fair-body p {
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pill-next {
+    background: rgba(201, 166, 104, 0.16);
+    color: var(--accent-ink);
+    border: 1px solid rgba(201, 166, 104, 0.42);
+  }
+
+  .pill-todo {
+    background: rgba(243, 239, 230, 0.06);
+    color: var(--ink-faint);
+    border: 1px solid var(--line);
+  }
+
+  .fair-go {
+    color: var(--ink-faint);
+    font-size: 1.15rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  a.fair:hover .fair-go { color: var(--accent); transform: translateX(3px); }
+
+  .fair--todo { border-style: dashed; background: transparent; }
+
+  /* ===== Vertretungen ===== */
+  .brands { background: var(--bg-alt); }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    perspective: 1400px;
+  }
+
+  .brand-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    color: #f7f4ef;
+    display: block;
+    border: 1px solid var(--line);
+    transition: transform 0.25s cubic-bezier(.22,.61,.36,1);
+    transform: perspective(1400px);
+    will-change: transform;
+  }
+
+  .brand-card > img,
+  .split-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
+  }
+
+  .brand-card:hover > img,
+  .brand-card:hover .split-media img { transform: scale(1.05); }
+
+  .brand-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(12,11,10,0.05) 0%, rgba(12,11,10,0.28) 48%, rgba(12,11,10,0.88) 100%);
+  }
+
+  .brand-card-content {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: 28px;
+  }
+
+  .brand-card h3 { font-size: 1.34rem; margin-bottom: 7px; }
+
+  .brand-card p {
+    font-size: 0.89rem;
+    color: #ddd4c2;
+    max-width: 36ch;
+    margin: 0;
+  }
+
+  .kicker {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.68rem;
+    color: var(--accent-ink);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .brand-card--featured { grid-column: 1 / -1; aspect-ratio: 21 / 9; }
+
+  .split-media { position: absolute; inset: 0; display: flex; }
+  .split-media img { position: static; width: 50%; }
+
+  .collection-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .collection-links a {
+    font-size: 0.79rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #17150f;
+    background: rgba(243, 239, 230, 0.94);
+    padding: 9px 17px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .collection-links a:hover { background: #fff; transform: translateY(-2px); }
+
+  .brand-link-wrap { text-decoration: none; color: inherit; display: inline-block; }
+  .brand-link-wrap:hover h3 { text-decoration: underline; text-underline-offset: 5px; }
+
+  /* ===== Kataloge ===== */
+  .catalogues { background: var(--bg); }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 20px;
+  }
+
+  .cat-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 30px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.22,.61,.36,1);
+  }
+
+  .cat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+  .cat-mark {
+    width: 46px; height: 46px;
+    border-radius: 11px;
+    background: rgba(201, 166, 104, 0.12);
+    border: 1px solid rgba(201, 166, 104, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--accent-ink);
+    margin-bottom: 20px;
+  }
+
+  .cat-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+
+  .cat-card p {
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    margin-bottom: 22px;
+    flex-grow: 1;
+  }
+
+  .cat-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--accent-ink);
+    text-decoration: none;
+    align-self: flex-start;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, gap 0.2s ease;
+  }
+
+  .cat-link:hover { border-bottom-color: var(--accent-ink); gap: 12px; }
+
+  /* ===== Kontakt ===== */
+  .contact-section { padding-top: 0; background: var(--bg); }
+
+  .contact {
+    background: var(--panel-deep);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 76px 56px;
+    background-image:
+      radial-gradient(circle at 14% 18%, rgba(201, 166, 104, 0.15), transparent 46%),
+      radial-gradient(circle at 86% 88%, rgba(201, 166, 104, 0.09), transparent 52%);
+  }
+
+  .contact .grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .contact h2 { font-size: clamp(1.9rem, 3.3vw, 2.4rem); margin-bottom: 16px; }
+  .contact p.lead { color: var(--ink-soft); max-width: 46ch; margin: 0; }
+
+  .contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-list a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.05rem;
+    padding: 20px 24px;
+    background: rgba(243, 239, 230, 0.05);
+    border: 1px solid rgba(243, 239, 230, 0.09);
+    border-radius: 14px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .contact-list a:hover {
+    background: rgba(243, 239, 230, 0.1);
+    border-color: rgba(201, 166, 104, 0.4);
+  }
+
+  .icon { width: 20px; text-align: center; color: var(--accent); }
+
+  /* ===== Fußzeile ===== */
+  footer {
+    text-align: center;
+    padding: 44px 0 60px;
+    color: var(--ink-faint);
+    font-size: 0.84rem;
+    background: var(--bg);
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .footer-legal {
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .footer-legal a { color: var(--ink-soft); text-decoration: none; }
+  .footer-legal a:hover { color: var(--ink); }
+
+  /* ===== Scroll-Animationen ===== */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.85s cubic-bezier(.22,.61,.36,1), transform 0.85s cubic-bezier(.22,.61,.36,1);
+  }
+
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  .brands-grid > [data-reveal]:nth-child(2) { transition-delay: 0.1s; }
+  .brands-grid > [data-reveal]:nth-child(3) { transition-delay: 0.2s; }
+  .cat-grid > [data-reveal]:nth-child(2) { transition-delay: 0.07s; }
+  .cat-grid > [data-reveal]:nth-child(3) { transition-delay: 0.14s; }
+  .cat-grid > [data-reveal]:nth-child(4) { transition-delay: 0.21s; }
 
   .hero-content .eyebrow,
   .hero-content h1,
@@ -232,88 +740,20 @@
   .hero-content .cta-row {
     opacity: 0;
     transform: translateY(26px);
-    transition: opacity 0.9s cubic-bezier(.22,.61,.36,1), transform 0.9s cubic-bezier(.22,.61,.36,1);
+    transition: opacity 0.95s cubic-bezier(.22,.61,.36,1), transform 0.95s cubic-bezier(.22,.61,.36,1);
   }
 
-  body.is-loaded .hero-content .eyebrow { opacity: 1; transform: none; transition-delay: 0.1s; }
-  body.is-loaded .hero-content h1 { opacity: 1; transform: none; transition-delay: 0.22s; }
-  body.is-loaded .hero-content p.lead { opacity: 1; transform: none; transition-delay: 0.36s; }
-  body.is-loaded .hero-content .cta-row { opacity: 1; transform: none; transition-delay: 0.48s; }
+  body.is-loaded .hero-content .eyebrow  { opacity: 1; transform: none; transition-delay: 0.10s; }
+  body.is-loaded .hero-content h1        { opacity: 1; transform: none; transition-delay: 0.22s; }
+  body.is-loaded .hero-content p.lead    { opacity: 1; transform: none; transition-delay: 0.36s; }
+  body.is-loaded .hero-content .cta-row  { opacity: 1; transform: none; transition-delay: 0.48s; }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: transform 0.25s cubic-bezier(.22,.61,.36,1), background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .btn-primary {
-    background: var(--ink);
-    color: var(--panel-deep);
-  }
-
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.25); }
-
-  .btn-secondary {
-    background: rgba(247, 244, 239, 0.08);
-    color: #f7f4ef;
-    border: 1px solid rgba(247, 244, 239, 0.45);
-  }
-
-  .btn-secondary:hover { background: rgba(247, 244, 239, 0.16); }
-
-  /* ---------- Marquee strip ---------- */
-
-  .marquee-strip {
-    background: var(--panel-deep);
-    color: var(--ink-soft);
-    padding: 18px 0;
-    overflow: hidden;
-    border-block: 1px solid var(--line);
-  }
-
-  .marquee-track {
-    display: flex;
-    gap: 64px;
-    white-space: nowrap;
-    animation: scroll-left 28s linear infinite;
-    width: max-content;
-  }
-
-  .marquee-track span {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-    color: #cfc4a8;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .marquee-track span::after {
-    content: "◆";
-    font-size: 0.5rem;
-    color: #6e6248;
-  }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
+  /* ===== Reduzierte Bewegung ===== */
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
     html { scroll-behavior: auto; }
-    [data-reveal] {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
+    .marquee-track { animation: none; }
     .hero-media img { animation: none; }
+    [data-reveal],
     .hero-content .eyebrow,
     .hero-content h1,
     .hero-content p.lead,
@@ -322,369 +762,57 @@
       transform: none !important;
       transition: none !important;
     }
-    .brand-card { transition: none !important; }
+    .brand-card, .fair, .cat-card { transition: none !important; }
   }
 
-  /* ---------- About ---------- */
-
-  section { padding: 104px 0; }
-
-  .about .grid {
-    display: grid;
-    grid-template-columns: 0.95fr 1.05fr;
-    gap: 64px;
-    align-items: center;
-  }
-
-  .about-image {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-    border: 1px solid var(--line);
-  }
-
-  .about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .section-eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.78rem;
-    color: var(--accent-ink);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-
-  .about-text h2 {
-    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-    margin-bottom: 20px;
-  }
-
-  .about-text p {
-    color: var(--ink-soft);
-    margin-bottom: 16px;
-    max-width: 52ch;
-  }
-
-  .stats {
-    display: flex;
-    gap: 40px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--line);
-    padding-top: 28px;
-  }
-
-  .stat strong {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-size: 2rem;
-    color: var(--ink);
-  }
-
-  .stat span {
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-  }
-
-  /* ---------- Brands ---------- */
-
-  .brands { background: var(--bg-alt); }
-
-  .section-head {
-    text-align: center;
-    max-width: 640px;
-    margin: 0 auto 56px;
-  }
-
-  .section-head .section-eyebrow { }
-
-  .section-head h2 {
-    font-size: clamp(1.9rem, 3.2vw, 2.5rem);
-    margin-bottom: 16px;
-  }
-
-  .section-head p { color: var(--ink-soft); font-size: 1.05rem; }
-
-  .brands-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    perspective: 1200px;
-  }
-
-  .brand-card {
-    position: relative;
-    border-radius: 18px;
-    overflow: hidden;
-    aspect-ratio: 5 / 4;
-    text-decoration: none;
-    color: #f7f4ef;
-    display: block;
-    border: 1px solid var(--line);
-    transition: transform 0.2s cubic-bezier(.22,.61,.36,1);
-    transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
-    will-change: transform;
-  }
-
-  .brand-card img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .brand-card:hover img { transform: scale(1.06); }
-
-  .brand-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(20,17,12,0.05) 0%, rgba(20,17,12,0.15) 45%, rgba(20,17,12,0.82) 100%);
-  }
-
-  .brand-card .brand-card-content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    padding: 26px;
-  }
-
-  .brand-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 6px;
-  }
-
-  .brand-card p {
-    font-size: 0.88rem;
-    color: #e3dbc9;
-    max-width: 32ch;
-  }
-
-  .brand-card .visit {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 14px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #f0e6c9;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-
-  .brand-card:hover .visit {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .brand-card--featured {
-    grid-column: 1 / -1;
-    aspect-ratio: 21 / 9;
-  }
-
-  .split-media {
-    position: absolute;
-    inset: 0;
-    display: flex;
-  }
-
-  .split-media img {
-    position: static;
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .brand-card--featured:hover .split-media img { transform: scale(1.06); }
-
-  .brand-card-content .kicker {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.72rem;
-    color: #d8cba6;
-    margin-bottom: 6px;
-  }
-
-  .collection-links {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-
-  .collection-links a {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #2b2620;
-    background: rgba(247, 244, 239, 0.92);
-    padding: 9px 16px;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .collection-links a:hover {
-    background: #fff;
-    transform: translateY(-1px);
-  }
-
-  .brand-parent-link {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
-  }
-
-  .brand-parent-link:hover h3 {
-    text-decoration: underline;
-    text-underline-offset: 5px;
-  }
-
-  @media (max-width: 780px) {
-    .brand-card--featured { aspect-ratio: 4 / 5; }
-  }
-
-  /* ---------- Contact ---------- */
-
-  .contact-section { padding-top: 0; }
-
-  .contact {
-    background: var(--panel-deep);
-    color: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    padding: 72px 56px;
-    background-image:
-      radial-gradient(circle at 15% 20%, rgba(201, 166, 104, 0.16), transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(201, 166, 104, 0.1), transparent 50%);
-  }
-
-  .contact .grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 56px;
-    align-items: center;
-  }
-
-  .contact .section-eyebrow { color: var(--accent-ink); }
-
-  .contact h2 {
-    font-size: clamp(1.9rem, 3.2vw, 2.4rem);
-    margin-bottom: 16px;
-  }
-
-  .contact p.lead {
-    color: #c9c2b2;
-    max-width: 44ch;
-    margin-bottom: 0;
-  }
-
-  .contact-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .contact-list a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 1.08rem;
-    padding: 20px 24px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    transition: background 0.2s;
-  }
-
-  .contact-list a:hover { background: rgba(255,255,255,0.12); }
-
-  .icon {
-    width: 22px;
-    text-align: center;
-    color: #cbb98d;
-  }
-
-  footer {
-    text-align: center;
-    padding: 40px 0 56px;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-  }
-
-  .footer-legal {
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .footer-legal a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 0.85rem;
-  }
-
-  .footer-legal a:hover { color: var(--ink); }
-
-  @media (max-width: 900px) {
+  /* ===== Responsiv ===== */
+  @media (max-width: 940px) {
+    .about .grid, .contact .grid { grid-template-columns: 1fr; gap: 40px; }
     .brands-grid { grid-template-columns: 1fr; }
-    .about .grid, .contact .grid { grid-template-columns: 1fr; }
+    .brand-card--featured { aspect-ratio: 4 / 5; }
+    .split-media { flex-direction: column; }
+    .split-media img { width: 100%; height: 50%; }
   }
 
   @media (max-width: 780px) {
-    section { padding: 72px 0; }
-    .hero { min-height: 92vh; }
-    .contact { padding: 44px 28px; border-radius: 20px; }
+    section { padding: 76px 0; }
+    .wrap { padding: 0 22px; }
+    .hero { min-height: 94vh; }
+    .contact { padding: 46px 26px; border-radius: 20px; }
+
+    .fair-year { grid-template-columns: 1fr; gap: 16px; }
+    .fair-year-label { position: static; font-size: 1.7rem; }
+    .fair { grid-template-columns: 74px 1fr; gap: 18px; padding: 18px 20px; }
+    .fair-date { padding-right: 16px; }
+    .fair-go { display: none; }
 
     .menu-toggle { display: flex; }
 
     .nav-links {
       position: absolute;
-      top: 76px;
-      left: 0;
-      right: 0;
+      top: 80px;
+      left: 0; right: 0;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      padding: 8px 32px 24px;
+      align-items: stretch;
+      gap: 0;
+      padding: 6px 22px 22px;
       background: var(--bg);
       border-bottom: 1px solid var(--line);
       opacity: 0;
       transform: translateY(-8px);
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.22s ease, transform 0.22s ease;
     }
 
-    .nav-links.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    .nav-links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
     .nav-links .navlink {
       display: block;
-      width: 100%;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line-soft);
     }
 
-    .nav-links .btn { margin-top: 12px; }
+    .nav-links .btn { margin-top: 16px; justify-content: center; }
   }
 </style>
 </head>
@@ -692,12 +820,17 @@
 
 <header>
   <div class="wrap">
-    <div class="brand">Ralf Traphöner</div>
+    <a class="brand" href="#top">
+      <span class="brand-name">Ralf Traphöner</span>
+      <span class="brand-sub">Möbelagentur</span>
+    </a>
     <nav>
       <div class="nav-links" id="navLinks">
         <a class="navlink" href="#ueber-mich">Über mich</a>
+        <a class="navlink" href="#messen">Messen</a>
         <a class="navlink" href="#vertretungen">Vertretungen</a>
-        <a class="btn btn-primary" style="padding:10px 22px" href="#kontakt">Kontakt</a>
+        <a class="navlink" href="#kataloge">Kataloge</a>
+        <a class="btn btn-primary btn-sm" href="#kontakt">Kontakt</a>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menü öffnen">
         <span></span><span></span><span></span>
@@ -706,21 +839,21 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-media">
-    <img src="images/hero-living.jpg" alt="Modernes Wohnzimmer mit Sofa, Sesseln und warmem Licht" loading="eager">
+    <img src="images/hero.jpg" alt="Modern eingerichteter Wohnraum mit Sofa, Sesseln und warmer Beleuchtung" fetchpriority="high">
   </div>
   <div class="hero-content">
     <div class="wrap">
-      <div class="eyebrow">Handelsagentur für Möbel</div>
-      <h1>Möbel mit Charakter, vertrieben mit Erfahrung.</h1>
+      <p class="eyebrow">Möbelagentur Ralf Traphöner</p>
+      <h1>Aus Möbeln wird Zuhause.</h1>
       <p class="lead">
-        Als selbstständiger Handelsvertreter verbinde ich renommierte Möbelmarken mit dem Fachhandel –
-        persönlich, zuverlässig und mit einem Gespür für gutes Design.
+        Seit über 30 Jahren verbinde ich ausgewählte Möbelmarken mit dem Fachhandel
+        in Nordrhein-Westfalen und den angrenzenden Regionen.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#kontakt">Kontakt aufnehmen</a>
-        <a class="btn btn-secondary" href="#vertretungen">Marken ansehen</a>
+        <a class="btn btn-secondary" href="#vertretungen">Vertretungen ansehen</a>
       </div>
     </div>
   </div>
@@ -729,9 +862,13 @@
 <div class="marquee-strip">
   <div class="marquee-track">
     <span>Battistella Company</span>
+    <span>Novamobili</span>
+    <span>Cinquanta3</span>
     <span>Dietsch</span>
     <span>La vida</span>
     <span>Battistella Company</span>
+    <span>Novamobili</span>
+    <span>Cinquanta3</span>
     <span>Dietsch</span>
     <span>La vida</span>
   </div>
@@ -741,32 +878,98 @@
   <div class="wrap">
     <div class="grid">
       <div class="about-image" data-reveal>
-        <img src="images/about-ambience.jpg" alt="Warm eingerichtetes Wohnzimmer mit Sofa und Pflanzen" loading="lazy">
+        <img src="images/about.jpg" alt="Wohnzimmer mit hellen Polstermöbeln und goldenen Akzenten" loading="lazy">
       </div>
       <div class="about-text" data-reveal>
-        <div class="section-eyebrow">Über mich</div>
-        <h2>Seit vielen Jahren im Möbelvertrieb zuhause</h2>
+        <p class="section-eyebrow">Über mich</p>
+        <h2>Über 30 Jahre Erfahrung im Möbelvertrieb</h2>
         <p>
-          Ich bin Ralf Traphöner, selbstständiger Handelsvertreter im Bereich Wohnmöbel.
-          Ich vertrete ausgewählte Hersteller gegenüber dem Fachhandel und begleite meine
-          Kunden von der Produktberatung bis zur langfristigen Zusammenarbeit.
+          Ich bin Ralf Traphöner, selbstständiger Handelsvertreter für hochwertige
+          Wohnmöbel. Ich vertrete ausgewählte Hersteller gegenüber dem Fachhandel
+          und begleite meine Kunden von der Sortimentsberatung über die Messe
+          bis zur langfristigen Zusammenarbeit.
         </p>
         <p>
-          [Platzhaltertext – hier folgt später mehr zu Werdegang, Vertretungsgebiet
-          und persönlichem Ansatz.]
+          Mein Vertretungsgebiet umfasst Nordrhein-Westfalen und die angrenzenden
+          Regionen. Was zählt, sind kurze Wege, verlässliche Absprachen und ein
+          Sortiment, hinter dem ich persönlich stehe.
         </p>
         <div class="stats">
           <div class="stat">
-            <strong data-count-to="3">0</strong>
-            <span>Vertretene Marken</span>
-          </div>
-          <div class="stat">
-            <strong data-count-to="2">0</strong>
-            <span>Herkunftsländer</span>
-          </div>
-          <div class="stat">
-            <strong>[X]</strong>
+            <strong><span data-count-to="30">30</span>+</strong>
             <span>Jahre Erfahrung</span>
+          </div>
+          <div class="stat">
+            <strong data-count-to="3">3</strong>
+            <span>Vertretene Häuser</span>
+          </div>
+          <div class="stat">
+            <strong>NRW</strong>
+            <span>&amp; angrenzende Regionen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fairs" id="messen">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="section-eyebrow">Messen &amp; Termine</p>
+      <h2>Wo Sie mich treffen</h2>
+      <p>Persönlich vor Ort – auf Verbandsmessen, im Showroom und auf internationalen Leitmessen.</p>
+    </div>
+
+    <div class="fair-year" data-reveal>
+      <div class="fair-year-label">2026</div>
+      <div class="fair-list">
+        <a class="fair" href="https://virtualtour.novamobili.it/" target="_blank" rel="noopener">
+          <div class="fair-date">
+            <span class="d">11.</span>
+            <span class="m">Sep</span>
+          </div>
+          <div class="fair-body">
+            <h3>Showroom Novamobili <span class="pill pill-next">Als Nächstes</span></h3>
+            <p>Battistella Company · Pieve di Soligo (TV), Italien</p>
+          </div>
+          <div class="fair-go" aria-hidden="true">→</div>
+        </a>
+        <div class="fair fair--todo">
+          <div class="fair-date">
+            <span class="d">—</span>
+            <span class="m">Herbst</span>
+          </div>
+          <div class="fair-body">
+            <h3>Regionale Verbandsmessen <span class="pill pill-todo">Termine folgen</span></h3>
+            <p>Nordrhein-Westfalen · Termine und Orte werden ergänzt</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fair-year" data-reveal>
+      <div class="fair-year-label">2027</div>
+      <div class="fair-list">
+        <a class="fair" href="https://www.salonemilano.it/en" target="_blank" rel="noopener">
+          <div class="fair-date">
+            <span class="d">13.–18.</span>
+            <span class="m">Apr</span>
+          </div>
+          <div class="fair-body">
+            <h3>Salone del Mobile.Milano</h3>
+            <p>Fiera Milano, Rho · Mailand, Italien</p>
+          </div>
+          <div class="fair-go" aria-hidden="true">→</div>
+        </a>
+        <div class="fair fair--todo">
+          <div class="fair-date">
+            <span class="d">—</span>
+            <span class="m">2027</span>
+          </div>
+          <div class="fair-body">
+            <h3>Regionale Verbandsmessen <span class="pill pill-todo">Termine folgen</span></h3>
+            <p>Nordrhein-Westfalen · Termine und Orte werden ergänzt</p>
           </div>
         </div>
       </div>
@@ -777,44 +980,87 @@
 <section class="brands" id="vertretungen">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <div class="section-eyebrow">Vertretungen</div>
-      <h2>Marken, die ich vertrete</h2>
+      <p class="section-eyebrow">Vertretungen</p>
+      <h2>Die Häuser, die ich vertrete</h2>
       <p>Eine sorgfältig ausgewählte Auswahl italienischer und deutscher Möbelhersteller.</p>
     </div>
+
     <div class="brands-grid">
       <div class="brand-card brand-card--featured" data-reveal>
         <div class="split-media">
-          <img src="images/brand-novamobili.jpg" alt="Sessel aus der Kollektion Nova mobili" loading="lazy">
-          <img src="images/brand-cinquanta3.jpg" alt="Sessel aus der Kollektion Cinquanta 3" loading="lazy">
+          <img src="images/brand-novamobili.jpg" alt="Esstisch aus Nussbaum der Kollektion Novamobili" loading="lazy">
+          <img src="images/brand-cinquanta3.jpg" alt="Schlafzimmer mit modularem Schranksystem von Cinquanta3" loading="lazy">
         </div>
         <div class="brand-card-content">
           <span class="kicker">Italienische Möbelmanufaktur</span>
-          <a class="brand-parent-link" href="https://www.battistellacompany.it/" target="_blank" rel="noopener">
+          <a class="brand-link-wrap" href="https://www.battistellacompany.it/" target="_blank" rel="noopener">
             <h3>Battistella Company</h3>
           </a>
-          <p>Mit den Kollektionen Nova mobili und Cinquanta 3</p>
+          <p>Wohn- und Schlafräume, modulare Schrank- und Regalsysteme – mit den Kollektionen Novamobili und Cinquanta3.</p>
           <div class="collection-links">
-            <a href="https://www.novamobili.it/de" target="_blank" rel="noopener">Nova mobili →</a>
-            <a href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">Cinquanta 3 →</a>
+            <a href="https://www.novamobili.it/de" target="_blank" rel="noopener">Novamobili →</a>
+            <a href="https://www.cinquanta3.it/de" target="_blank" rel="noopener">Cinquanta3 →</a>
           </div>
         </div>
       </div>
+
       <a class="brand-card" data-reveal href="https://www.dietsch.de" target="_blank" rel="noopener">
-        <img src="images/brand-dietsch.jpg" alt="Heller, skandinavisch anmutender Wohnraum von Dietsch" loading="lazy">
+        <img src="images/brand-dietsch.jpg" alt="Helles Polstersofa der Kollektion Palazzo von Dietsch" loading="lazy">
         <div class="brand-card-content">
+          <span class="kicker">Polstermöbel aus Deutschland</span>
           <h3>Dietsch</h3>
-          <p>Deutsche Möbelfertigung mit Tradition</p>
-          <span class="visit">Website besuchen →</span>
+          <p>Sofas und Sessel in individueller Fertigung – Manufakturqualität aus deutscher Produktion.</p>
         </div>
       </a>
+
       <a class="brand-card" data-reveal href="https://www.lavida-moebel.de" target="_blank" rel="noopener">
-        <img src="images/brand-lavida.jpg" alt="Gemütliches Sofa mit warmem Licht von La vida" loading="lazy">
+        <img src="images/brand-lavida.jpg" alt="Grauer Relaxsessel mit Hocker vor einem Kamin" loading="lazy">
         <div class="brand-card-content">
+          <span class="kicker">Esszimmer &amp; Relaxmöbel</span>
           <h3>La vida</h3>
-          <p>Wohnkonzepte für modernes Wohnen</p>
-          <span class="visit">Website besuchen →</span>
+          <p>Stühle, Esstische, Bänke, Barhocker und Relaxsessel für modernes Wohnen.</p>
         </div>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="catalogues" id="kataloge">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="section-eyebrow">Kataloge</p>
+      <h2>Sortimente im Überblick</h2>
+      <p>Alle aktuellen Kataloge und Sortimente der vertretenen Häuser – direkt beim Hersteller.</p>
+    </div>
+
+    <div class="cat-grid">
+      <div class="cat-card" data-reveal>
+        <div class="cat-mark">NM</div>
+        <h3>Novamobili</h3>
+        <p>Wohnen, Schlafen, Regalsysteme und Schränke. Kataloge, Datenblätter und 3D-Dateien.</p>
+        <a class="cat-link" href="https://www.novamobili.it/de/download/kataloge" target="_blank" rel="noopener">Kataloge ansehen →</a>
+      </div>
+
+      <div class="cat-card" data-reveal>
+        <div class="cat-mark">C3</div>
+        <h3>Cinquanta3</h3>
+        <p>Modulare Schranksysteme und Raumlösungen für Wohn-, Schlaf- und Objektbereiche.</p>
+        <a class="cat-link" href="https://www.cinquanta3.it/de/kataloge" target="_blank" rel="noopener">Kataloge ansehen →</a>
+      </div>
+
+      <div class="cat-card" data-reveal>
+        <div class="cat-mark">D</div>
+        <h3>Dietsch</h3>
+        <p>Polstermöbel-Kollektionen Palazzo, Paolo Nero und Varianta sowie Stoff- und Lederübersichten.</p>
+        <a class="cat-link" href="https://www.dietsch.de/service/downloads/" target="_blank" rel="noopener">Downloads ansehen →</a>
+      </div>
+
+      <div class="cat-card" data-reveal>
+        <div class="cat-mark">LV</div>
+        <h3>La vida</h3>
+        <p>Das komplette Sortiment online – dazu ein 360°-Rundgang durch den Showroom.</p>
+        <a class="cat-link" href="https://www.lavida-moebel.de/#unsersortiment" target="_blank" rel="noopener">Sortiment ansehen →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -824,19 +1070,22 @@
     <div class="contact" data-reveal>
       <div class="grid">
         <div>
-          <div class="section-eyebrow">Kontakt</div>
+          <p class="section-eyebrow">Kontakt</p>
           <h2>Lassen Sie uns sprechen.</h2>
-          <p class="lead">Für Anfragen, Terminvereinbarungen oder weitere Informationen zu den vertretenen Marken stehe ich Ihnen gerne zur Verfügung.</p>
+          <p class="lead">
+            Für Anfragen, Terminvereinbarungen oder weitere Informationen zu den
+            vertretenen Häusern stehe ich Ihnen gerne zur Verfügung.
+          </p>
         </div>
         <ul class="contact-list">
           <li>
             <a href="mailto:r.traphoener@t-online.de">
-              <span class="icon">✉</span> r.traphoener@t-online.de
+              <span class="icon" aria-hidden="true">✉</span> r.traphoener@t-online.de
             </a>
           </li>
           <li>
             <a href="tel:+491732960735">
-              <span class="icon">☎</span> +49 173 2960735
+              <span class="icon" aria-hidden="true">☎</span> +49 173 2960735
             </a>
           </li>
         </ul>
@@ -851,15 +1100,18 @@
     <span aria-hidden="true">·</span>
     <a href="impressum.html">Impressum</a>
   </div>
-  © <span id="year"></span> Ralf Traphöner · Handelsagentur für Möbel
+  © <span id="year"></span> Möbelagentur Ralf Traphöner
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobiles Menü
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* Mobiles Menü */
   const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
+  const navLinks   = document.getElementById('navLinks');
 
   function closeMenu() {
     navLinks.classList.remove('open');
@@ -871,52 +1123,53 @@
     menuToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
+  navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-
-  // Scroll-Animationen
+  /* Scroll-Animationen */
   const revealEls = document.querySelectorAll('[data-reveal]');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if ('IntersectionObserver' in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
+    const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  // Zahlen-Animation
+  /* Zahlen-Animation */
   const counters = document.querySelectorAll('[data-count-to]');
 
+  /* Die echten Werte stehen im HTML. Die Animation zählt nur hoch und endet
+     immer exakt auf dem Zielwert – ohne JavaScript bleibt die Zahl korrekt. */
   function animateCount(el) {
     const target = parseInt(el.getAttribute('data-count-to'), 10);
+    if (!Number.isFinite(target)) return;
     if (reduceMotion) { el.textContent = target; return; }
-    const duration = 900;
-    const start = performance.now();
+
+    const duration = 1000;
+    let start = null;
+
     function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased);
-      if (progress < 1) requestAnimationFrame(tick);
+      if (start === null) start = now;
+      const p = Math.min((now - start) / duration, 1);
+      if (p >= 1) { el.textContent = target; return; }
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      requestAnimationFrame(tick);
     }
+
+    el.textContent = '0';
     requestAnimationFrame(tick);
   }
 
-  if ('IntersectionObserver' in window && counters.length) {
-    const countIo = new IntersectionObserver((entries) => {
+  if ('IntersectionObserver' in window && counters.length && !reduceMotion) {
+    const countIo = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCount(entry.target);
@@ -925,52 +1178,40 @@
       });
     }, { threshold: 0.6 });
     counters.forEach(el => countIo.observe(el));
-  } else {
-    counters.forEach(el => { el.textContent = el.getAttribute('data-count-to'); });
   }
 
-  // Hero-Eintrittsanimation
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => document.body.classList.add('is-loaded'));
-  });
+  /* Hero-Eintritt */
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-loaded')));
 
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  // Magnet-Buttons
+  /* Magnet-Buttons */
   if (finePointer && !reduceMotion) {
-    document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-      let bounds;
-      btn.addEventListener('mouseenter', () => { bounds = btn.getBoundingClientRect(); });
-      btn.addEventListener('mousemove', (e) => {
-        bounds = bounds || btn.getBoundingClientRect();
-        const relX = e.clientX - bounds.left - bounds.width / 2;
-        const relY = e.clientY - bounds.top - bounds.height / 2;
-        btn.style.transform = `translate(${relX * 0.25}px, ${relY * 0.35}px)`;
+    document.querySelectorAll('.hero .btn').forEach(btn => {
+      let b;
+      btn.addEventListener('mouseenter', () => { b = btn.getBoundingClientRect(); });
+      btn.addEventListener('mousemove', e => {
+        b = b || btn.getBoundingClientRect();
+        btn.style.transform = `translate(${(e.clientX - b.left - b.width / 2) * 0.22}px, ${(e.clientY - b.top - b.height / 2) * 0.3}px)`;
       });
       btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
   }
 
-  // Karten-Tilt
+  /* Karten-Tilt */
   if (finePointer && !reduceMotion) {
     document.querySelectorAll('.brand-card').forEach(card => {
-      let bounds;
-      card.addEventListener('mouseenter', () => { bounds = card.getBoundingClientRect(); });
-      card.addEventListener('mousemove', (e) => {
-        bounds = bounds || card.getBoundingClientRect();
-        const px = (e.clientX - bounds.left) / bounds.width;
-        const py = (e.clientY - bounds.top) / bounds.height;
-        const rotateY = (px - 0.5) * 8;
-        const rotateX = (0.5 - py) * 8;
-        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+      let b;
+      card.addEventListener('mouseenter', () => { b = card.getBoundingClientRect(); });
+      card.addEventListener('mousemove', e => {
+        b = b || card.getBoundingClientRect();
+        const px = (e.clientX - b.left) / b.width;
+        const py = (e.clientY - b.top) / b.height;
+        card.style.transform = `perspective(1400px) rotateX(${(0.5 - py) * 5}deg) rotateY(${(px - 0.5) * 5}deg) scale(1.008)`;
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
-      });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1400px)'; });
     });
   }
 
-  // Hero-Parallax
+  /* Hero-Parallax */
   const heroMedia = document.querySelector('.hero-media');
   if (heroMedia && !reduceMotion) {
     let ticking = false;
@@ -978,8 +1219,7 @@
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const offset = Math.min(window.scrollY, 300);
-        heroMedia.style.transform = `translateY(${offset * 0.1}px)`;
+        heroMedia.style.transform = `translateY(${Math.min(window.scrollY, 400) * 0.12}px)`;
         ticking = false;
       });
     }, { passive: true });
