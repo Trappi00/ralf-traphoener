@@ -162,8 +162,8 @@
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    padding: 14px 28px;
-    border-radius: 999px;
+    padding: 15px 30px;
+    border-radius: 2px;
     font-size: 0.94rem;
     font-weight: 500;
     text-decoration: none;
@@ -309,18 +309,28 @@
     margin-bottom: 16px;
   }
 
+  /* Kopf eines Abschnitts: Titel links, Einordnung rechts – bewusst asymmetrisch */
   .section-head {
-    max-width: 660px;
-    margin: 0 auto 60px;
-    text-align: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 52px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
   }
 
   .section-head h2 {
     font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-    margin-bottom: 16px;
+    margin: 0;
   }
 
-  .section-head p { color: var(--ink-soft); font-size: 1.04rem; }
+  .section-head .section-intro {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 5px;
+  }
 
   /* ===== Über mich ===== */
   .about { background: var(--bg-alt); }
@@ -333,7 +343,7 @@
   }
 
   .about-image {
-    border-radius: 20px;
+    border-radius: 4px;
     overflow: hidden;
     aspect-ratio: 4 / 3;
     border: 1px solid var(--line);
@@ -399,33 +409,31 @@
   .fair-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    border-top: 1px solid var(--line);
   }
 
   .fair {
     display: grid;
     grid-template-columns: 92px 1fr auto;
-    gap: 26px;
+    gap: 30px;
     align-items: center;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 22px 26px;
+    border-bottom: 1px solid var(--line);
+    padding: 24px 6px;
     text-decoration: none;
-    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(.22,.61,.36,1);
+    transition: padding 0.3s cubic-bezier(.22,.61,.36,1), background 0.3s ease;
   }
 
   a.fair:hover {
-    border-color: var(--accent);
-    background: #26221c;
-    transform: translateX(4px);
+    padding-left: 18px;
+    padding-right: 18px;
+    background: rgba(243, 239, 230, 0.03);
   }
 
-  .fair-date {
-    text-align: center;
-    border-right: 1px solid var(--line);
-    padding-right: 22px;
-  }
+  a.fair:hover .fair-body h3 { color: var(--accent-ink); }
+
+  .fair-body h3 { transition: color 0.25s ease; }
+
+  .fair-date { text-align: left; }
 
   .fair-date .d {
     display: block;
@@ -491,7 +499,7 @@
 
   a.fair:hover .fair-go { color: var(--accent); transform: translateX(3px); }
 
-  .fair--todo { border-style: dashed; background: transparent; }
+  .fair--todo .fair-date, .fair--todo .fair-body h3 { color: var(--ink-faint); }
 
   /* ===== Vertretungen ===== */
   .brands { background: var(--bg-alt); }
@@ -505,7 +513,7 @@
 
   .brand-card {
     position: relative;
-    border-radius: 20px;
+    border-radius: 4px;
     overflow: hidden;
     aspect-ratio: 5 / 4;
     color: #f7f4ef;
@@ -581,7 +589,7 @@
     color: #17150f;
     background: rgba(243, 239, 230, 0.94);
     padding: 9px 17px;
-    border-radius: 999px;
+    border-radius: 2px;
     text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
@@ -594,59 +602,60 @@
   /* ===== Kataloge ===== */
   .catalogues { background: var(--bg); }
 
-  .cat-grid {
+  /* Verzeichnis statt Kartenraster – ein Katalogüberblick ist ein Index */
+  .index-list { list-style: none; }
+
+  .index-list li { border-bottom: 1px solid var(--line); }
+
+  .index-list a {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-    gap: 20px;
+    grid-template-columns: minmax(140px, 0.42fr) minmax(0, 1fr) auto;
+    gap: 40px;
+    align-items: baseline;
+    padding: 30px 6px;
+    text-decoration: none;
+    transition: padding 0.3s cubic-bezier(.22,.61,.36,1), background 0.3s ease;
   }
 
-  .cat-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 30px 28px 26px;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.25s ease, transform 0.25s cubic-bezier(.22,.61,.36,1);
+  .index-list a:hover {
+    padding-left: 18px;
+    padding-right: 18px;
+    background: rgba(243, 239, 230, 0.03);
   }
 
-  .cat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-
-  .cat-mark {
-    width: 46px; height: 46px;
-    border-radius: 11px;
-    background: rgba(201, 166, 104, 0.12);
-    border: 1px solid rgba(201, 166, 104, 0.3);
-    display: flex; align-items: center; justify-content: center;
+  .idx-name {
     font-family: 'Fraunces', Georgia, serif;
-    font-size: 0.95rem;
-    color: var(--accent-ink);
-    margin-bottom: 20px;
+    font-size: 1.42rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: color 0.25s ease;
   }
 
-  .cat-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .index-list a:hover .idx-name { color: var(--accent-ink); }
 
-  .cat-card p {
+  .idx-desc {
     color: var(--ink-faint);
-    font-size: 0.88rem;
-    margin-bottom: 22px;
-    flex-grow: 1;
+    font-size: 0.92rem;
   }
 
-  .cat-link {
+  .idx-action {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.86rem;
-    font-weight: 500;
-    color: var(--accent-ink);
-    text-decoration: none;
-    align-self: flex-start;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease, gap 0.2s ease;
+    gap: 9px;
+    transition: color 0.25s ease;
   }
 
-  .cat-link:hover { border-bottom-color: var(--accent-ink); gap: 12px; }
+  .index-list a:hover .idx-action { color: var(--accent-ink); }
+
+  .idx-action span {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(.22,.61,.36,1);
+  }
+
+  .index-list a:hover .idx-action span { transform: translate(3px, -3px); }
 
   /* ===== Kontakt ===== */
   .contact-section { padding-top: 0; background: var(--bg); }
@@ -654,7 +663,7 @@
   .contact {
     background: var(--panel-deep);
     border: 1px solid var(--line);
-    border-radius: 28px;
+    border-radius: 4px;
     padding: 76px 56px;
     background-image:
       radial-gradient(circle at 14% 18%, rgba(201, 166, 104, 0.15), transparent 46%),
@@ -687,7 +696,7 @@
     padding: 20px 24px;
     background: rgba(243, 239, 230, 0.05);
     border: 1px solid rgba(243, 239, 230, 0.09);
-    border-radius: 14px;
+    border-radius: 3px;
     transition: background 0.2s ease, border-color 0.2s ease;
   }
 
@@ -730,9 +739,6 @@
 
   .brands-grid > [data-reveal]:nth-child(2) { transition-delay: 0.1s; }
   .brands-grid > [data-reveal]:nth-child(3) { transition-delay: 0.2s; }
-  .cat-grid > [data-reveal]:nth-child(2) { transition-delay: 0.07s; }
-  .cat-grid > [data-reveal]:nth-child(3) { transition-delay: 0.14s; }
-  .cat-grid > [data-reveal]:nth-child(4) { transition-delay: 0.21s; }
 
   .hero-content .eyebrow,
   .hero-content h1,
@@ -762,11 +768,16 @@
       transform: none !important;
       transition: none !important;
     }
-    .brand-card, .fair, .cat-card { transition: none !important; }
+    .brand-card, .fair, .index-list a { transition: none !important; }
   }
 
   /* ===== Responsiv ===== */
   @media (max-width: 940px) {
+    .section-head { grid-template-columns: 1fr; gap: 14px; align-items: start; }
+    .index-list a { grid-template-columns: 1fr auto; gap: 8px 24px; align-items: baseline; }
+    .idx-name   { grid-column: 1; grid-row: 1; }
+    .idx-action { grid-column: 2; grid-row: 1; justify-self: end; }
+    .idx-desc   { grid-column: 1 / -1; grid-row: 2; }
     .about .grid, .contact .grid { grid-template-columns: 1fr; gap: 40px; }
     .brands-grid { grid-template-columns: 1fr; }
     .brand-card--featured { aspect-ratio: 4 / 5; }
@@ -778,12 +789,11 @@
     section { padding: 76px 0; }
     .wrap { padding: 0 22px; }
     .hero { min-height: 94vh; }
-    .contact { padding: 46px 26px; border-radius: 20px; }
+    .contact { padding: 46px 26px; }
 
     .fair-year { grid-template-columns: 1fr; gap: 16px; }
     .fair-year-label { position: static; font-size: 1.7rem; }
-    .fair { grid-template-columns: 74px 1fr; gap: 18px; padding: 18px 20px; }
-    .fair-date { padding-right: 16px; }
+    .fair { grid-template-columns: 68px 1fr; gap: 18px; padding: 20px 4px; }
     .fair-go { display: none; }
 
     .menu-toggle { display: flex; }
@@ -916,9 +926,11 @@
 <section class="fairs" id="messen">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <p class="section-eyebrow">Messen &amp; Termine</p>
-      <h2>Wo Sie mich treffen</h2>
-      <p>Persönlich vor Ort – auf Verbandsmessen, im Showroom und auf internationalen Leitmessen.</p>
+      <div>
+        <p class="section-eyebrow">Messen &amp; Termine</p>
+        <h2>Wo Sie mich treffen</h2>
+      </div>
+      <p class="section-intro">Persönlich vor Ort – auf Verbandsmessen, im Showroom und auf internationalen Leitmessen.</p>
     </div>
 
     <div class="fair-year" data-reveal>
@@ -980,9 +992,11 @@
 <section class="brands" id="vertretungen">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <p class="section-eyebrow">Vertretungen</p>
-      <h2>Die Häuser, die ich vertrete</h2>
-      <p>Eine sorgfältig ausgewählte Auswahl italienischer und deutscher Möbelhersteller.</p>
+      <div>
+        <p class="section-eyebrow">Vertretungen</p>
+        <h2>Die Häuser, die ich vertrete</h2>
+      </div>
+      <p class="section-intro">Eine sorgfältig ausgewählte Auswahl italienischer und deutscher Möbelhersteller.</p>
     </div>
 
     <div class="brands-grid">
@@ -1028,40 +1042,43 @@
 <section class="catalogues" id="kataloge">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <p class="section-eyebrow">Kataloge</p>
-      <h2>Sortimente im Überblick</h2>
-      <p>Alle aktuellen Kataloge und Sortimente der vertretenen Häuser – direkt beim Hersteller.</p>
+      <div>
+        <p class="section-eyebrow">Kataloge</p>
+        <h2>Sortimente im Überblick</h2>
+      </div>
+      <p class="section-intro">Alle aktuellen Kataloge und Sortimente – direkt beim Hersteller.</p>
     </div>
 
-    <div class="cat-grid">
-      <div class="cat-card" data-reveal>
-        <div class="cat-mark">NM</div>
-        <h3>Novamobili</h3>
-        <p>Wohnen, Schlafen, Regalsysteme und Schränke. Kataloge, Datenblätter und 3D-Dateien.</p>
-        <a class="cat-link" href="https://www.novamobili.it/de/download/kataloge" target="_blank" rel="noopener">Kataloge ansehen →</a>
-      </div>
-
-      <div class="cat-card" data-reveal>
-        <div class="cat-mark">C3</div>
-        <h3>Cinquanta3</h3>
-        <p>Modulare Schranksysteme und Raumlösungen für Wohn-, Schlaf- und Objektbereiche.</p>
-        <a class="cat-link" href="https://www.cinquanta3.it/de/kataloge" target="_blank" rel="noopener">Kataloge ansehen →</a>
-      </div>
-
-      <div class="cat-card" data-reveal>
-        <div class="cat-mark">D</div>
-        <h3>Dietsch</h3>
-        <p>Polstermöbel-Kollektionen Palazzo, Paolo Nero und Varianta sowie Stoff- und Lederübersichten.</p>
-        <a class="cat-link" href="https://www.dietsch.de/service/downloads/" target="_blank" rel="noopener">Downloads ansehen →</a>
-      </div>
-
-      <div class="cat-card" data-reveal>
-        <div class="cat-mark">LV</div>
-        <h3>La vida</h3>
-        <p>Das komplette Sortiment online – dazu ein 360°-Rundgang durch den Showroom.</p>
-        <a class="cat-link" href="https://www.lavida-moebel.de/#unsersortiment" target="_blank" rel="noopener">Sortiment ansehen →</a>
-      </div>
-    </div>
+    <ul class="index-list" data-reveal>
+      <li>
+        <a href="https://www.novamobili.it/de/download/kataloge" target="_blank" rel="noopener">
+          <span class="idx-name">Novamobili</span>
+          <span class="idx-desc">Wohnen, Schlafen, Regalsysteme und Schränke</span>
+          <span class="idx-action">Kataloge <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.cinquanta3.it/de/kataloge" target="_blank" rel="noopener">
+          <span class="idx-name">Cinquanta3</span>
+          <span class="idx-desc">Modulare Schranksysteme für Wohn-, Schlaf- und Objektbereiche</span>
+          <span class="idx-action">Kataloge <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.dietsch.de/service/downloads/" target="_blank" rel="noopener">
+          <span class="idx-name">Dietsch</span>
+          <span class="idx-desc">Kollektionen Palazzo, Paolo Nero, Varianta sowie Stoffe und Leder</span>
+          <span class="idx-action">Downloads <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.lavida-moebel.de/#unsersortiment" target="_blank" rel="noopener">
+          <span class="idx-name">La vida</span>
+          <span class="idx-desc">Das komplette Sortiment online, dazu ein 360°-Rundgang</span>
+          <span class="idx-action">Sortiment <span aria-hidden="true">↗</span></span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>
 
