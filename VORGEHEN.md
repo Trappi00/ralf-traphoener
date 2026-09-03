@@ -165,6 +165,24 @@ Auf Basis der handschriftlichen Konzeptskizze wurde die Seite neu aufgebaut:
   La vida abgestimmt sein – idealerweise über die Händlerportale, in denen
   die Hersteller offizielles Bildmaterial bereitstellen.
 
+## Schritt 10 – Design grundlegend überarbeitet (helles, ruhiges Layout)
+
+Das dunkle Design mit goldenem Verlaufs-Glow, Zoom-Effekt im Titelbild,
+mauszeigerfolgenden Buttons und kippenden Karten wirkte in der Summe zu sehr
+nach Trend-Vorlage statt nach handwerklich sauberer Website. Es wurde durch
+ein helles, redaktionelles Layout ersetzt:
+
+- Heller Hintergrund, dunkler Text, eine einzige zurückhaltende Akzentfarbe
+  (gedecktes Nussbaumbraun) statt Gold-Verlauf
+- Zoom-Animation, Bild-Parallax, Magnet-Buttons und 3D-Kartenkippen entfernt
+- Laufband mit Markennamen entfernt (reines Deko-Element ohne echten Nutzen)
+- Kopfzeile ohne Glaseffekt, schlicht deckend
+- Impressum und Datenschutzerklärung an dasselbe helle Design angeglichen
+
+Liste, Zahlen-Hochzählen beim Scrollen und die dezente Eintritts-Animation im
+Hero-Bereich blieben erhalten – das sind zurückhaltende Details, keine
+auffälligen Effekte.
+
 ## Wie man die Seite später aktualisiert
 
 Jede Änderung läuft nach demselben Prinzip:

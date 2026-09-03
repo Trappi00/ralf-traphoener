@@ -27,17 +27,14 @@
 
   /* ===== Farbtokens ===== */
   :root {
-    --bg: #131210;
-    --bg-alt: #1a1815;
-    --panel: #201d19;
-    --panel-deep: #0c0b0a;
-    --ink: #f3efe6;
-    --ink-soft: #b2a99b;
-    --ink-faint: #7d7466;
-    --accent: #c9a668;
-    --accent-ink: #e3c891;
-    --line: #34302a;
-    --line-soft: #262320;
+    --bg: #fdfcfa;
+    --bg-alt: #f4f2ec;
+    --ink: #1c1a17;
+    --ink-soft: #55524a;
+    --ink-faint: #8b8779;
+    --accent: #7a4f34;
+    --line: #e3ddd0;
+    --line-soft: #ece7db;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,10 +77,8 @@
     position: sticky;
     top: 0;
     z-index: 40;
-    background: rgba(19, 18, 16, 0.82);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
   }
 
   header .wrap {
@@ -171,15 +166,16 @@
     transition: transform 0.25s cubic-bezier(.22,.61,.36,1), background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
-  .btn-primary { background: var(--ink); color: var(--panel-deep); }
-  .btn-primary:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.45); }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: #33302a; }
 
+  /* Liegt im Hero auf dem Foto – bewusst unabhängig vom Seitenthema hell gehalten */
   .btn-secondary {
-    background: rgba(243, 239, 230, 0.06);
-    color: var(--ink);
-    border: 1px solid rgba(243, 239, 230, 0.38);
+    background: rgba(253, 252, 250, 0.1);
+    color: #fdfcfa;
+    border: 1px solid rgba(253, 252, 250, 0.5);
   }
-  .btn-secondary:hover { background: rgba(243, 239, 230, 0.14); }
+  .btn-secondary:hover { background: rgba(253, 252, 250, 0.18); }
 
   .btn-sm { padding: 10px 22px; font-size: 0.88rem; }
 
@@ -199,13 +195,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center 55%;
-    animation: kenburns 26s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-
-  @keyframes kenburns {
-    from { transform: scale(1.05); }
-    to   { transform: scale(1.15); }
   }
 
   .hero-media::after {
@@ -233,22 +222,24 @@
     z-index: 1;
     width: 100%;
     padding: 80px 0 84px;
+    /* Liegt auf dem Foto, nicht auf dem Seitenhintergrund – Farbe bewusst fest */
+    color: #fdfcfa;
   }
 
   .eyebrow {
     text-transform: uppercase;
-    letter-spacing: 0.19em;
+    letter-spacing: 0.16em;
     font-size: 0.74rem;
     font-weight: 600;
-    color: var(--accent-ink);
+    color: #d9c9ab;
     margin-bottom: 20px;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 6.4vw, 5rem);
-    line-height: 1.02;
+    font-size: clamp(2.6rem, 5.6vw, 4.3rem);
+    line-height: 1.08;
     margin-bottom: 24px;
-    max-width: 13ch;
+    max-width: 14ch;
   }
 
   .hero p.lead {
@@ -259,43 +250,6 @@
   }
 
   .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-
-  /* ===== Laufband ===== */
-  .marquee-strip {
-    background: var(--panel-deep);
-    padding: 20px 0;
-    overflow: hidden;
-    border-bottom: 1px solid var(--line-soft);
-  }
-
-  .marquee-track {
-    display: flex;
-    gap: 60px;
-    white-space: nowrap;
-    animation: scroll-left 30s linear infinite;
-    width: max-content;
-  }
-
-  .marquee-track span {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.02rem;
-    color: var(--ink-faint);
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .marquee-track span::after {
-    content: "◆";
-    font-size: 0.44rem;
-    color: var(--accent);
-    opacity: 0.75;
-  }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
 
   /* ===== Abschnitte ===== */
   section { padding: 108px 0; }
@@ -426,10 +380,10 @@
   a.fair:hover {
     padding-left: 18px;
     padding-right: 18px;
-    background: rgba(243, 239, 230, 0.03);
+    background: rgba(28, 26, 23, 0.025);
   }
 
-  a.fair:hover .fair-body h3 { color: var(--accent-ink); }
+  a.fair:hover .fair-body h3 { color: var(--accent); }
 
   .fair-body h3 { transition: color 0.25s ease; }
 
@@ -480,13 +434,13 @@
   }
 
   .pill-next {
-    background: rgba(201, 166, 104, 0.16);
-    color: var(--accent-ink);
-    border: 1px solid rgba(201, 166, 104, 0.42);
+    background: rgba(122, 79, 52, 0.08);
+    color: var(--accent);
+    border: 1px solid rgba(122, 79, 52, 0.3);
   }
 
   .pill-todo {
-    background: rgba(243, 239, 230, 0.06);
+    background: var(--bg-alt);
     color: var(--ink-faint);
     border: 1px solid var(--line);
   }
@@ -508,7 +462,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    perspective: 1400px;
   }
 
   .brand-card {
@@ -519,9 +472,6 @@
     color: #f7f4ef;
     display: block;
     border: 1px solid var(--line);
-    transition: transform 0.25s cubic-bezier(.22,.61,.36,1);
-    transform: perspective(1400px);
-    will-change: transform;
   }
 
   .brand-card > img,
@@ -531,11 +481,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
+    transition: transform 0.5s ease;
   }
 
   .brand-card:hover > img,
-  .brand-card:hover .split-media img { transform: scale(1.05); }
+  .brand-card:hover .split-media img { transform: scale(1.025); }
 
   .brand-card::after {
     content: "";
@@ -560,12 +510,13 @@
     margin: 0;
   }
 
+  /* Liegt auf dem Kartenfoto – Farbe bewusst fest, unabhängig vom Seitenthema */
   .kicker {
     display: block;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-size: 0.68rem;
-    color: var(--accent-ink);
+    color: #d9c9ab;
     margin-bottom: 8px;
     font-weight: 600;
   }
@@ -620,7 +571,7 @@
   .index-list a:hover {
     padding-left: 18px;
     padding-right: 18px;
-    background: rgba(243, 239, 230, 0.03);
+    background: rgba(28, 26, 23, 0.025);
   }
 
   .idx-name {
@@ -631,7 +582,7 @@
     transition: color 0.25s ease;
   }
 
-  .index-list a:hover .idx-name { color: var(--accent-ink); }
+  .index-list a:hover .idx-name { color: var(--accent); }
 
   .idx-desc {
     color: var(--ink-faint);
@@ -648,7 +599,7 @@
     transition: color 0.25s ease;
   }
 
-  .index-list a:hover .idx-action { color: var(--accent-ink); }
+  .index-list a:hover .idx-action { color: var(--accent); }
 
   .idx-action span {
     display: inline-block;
@@ -661,13 +612,10 @@
   .contact-section { padding-top: 0; background: var(--bg); }
 
   .contact {
-    background: var(--panel-deep);
+    background: var(--bg-alt);
     border: 1px solid var(--line);
     border-radius: 4px;
     padding: 76px 56px;
-    background-image:
-      radial-gradient(circle at 14% 18%, rgba(201, 166, 104, 0.15), transparent 46%),
-      radial-gradient(circle at 86% 88%, rgba(201, 166, 104, 0.09), transparent 52%);
   }
 
   .contact .grid {
@@ -689,21 +637,19 @@
 
   .contact-list a {
     text-decoration: none;
+    color: var(--ink);
     display: flex;
     align-items: center;
     gap: 16px;
     font-size: 1.05rem;
     padding: 20px 24px;
-    background: rgba(243, 239, 230, 0.05);
-    border: 1px solid rgba(243, 239, 230, 0.09);
+    background: var(--bg);
+    border: 1px solid var(--line);
     border-radius: 3px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: border-color 0.2s ease;
   }
 
-  .contact-list a:hover {
-    background: rgba(243, 239, 230, 0.1);
-    border-color: rgba(201, 166, 104, 0.4);
-  }
+  .contact-list a:hover { border-color: var(--accent); }
 
   .icon { width: 20px; text-align: center; color: var(--accent); }
 
@@ -757,8 +703,6 @@
   /* ===== Reduzierte Bewegung ===== */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .marquee-track { animation: none; }
-    .hero-media img { animation: none; }
     [data-reveal],
     .hero-content .eyebrow,
     .hero-content h1,
@@ -868,21 +812,6 @@
     </div>
   </div>
 </section>
-
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span>Battistella Company</span>
-    <span>Novamobili</span>
-    <span>Cinquanta3</span>
-    <span>Dietsch</span>
-    <span>La vida</span>
-    <span>Battistella Company</span>
-    <span>Novamobili</span>
-    <span>Cinquanta3</span>
-    <span>Dietsch</span>
-    <span>La vida</span>
-  </div>
-</div>
 
 <section class="about" id="ueber-mich">
   <div class="wrap">
@@ -1124,7 +1053,6 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* Mobiles Menü */
   const menuToggle = document.getElementById('menuToggle');
@@ -1199,48 +1127,6 @@
 
   /* Hero-Eintritt */
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-loaded')));
-
-  /* Magnet-Buttons */
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll('.hero .btn').forEach(btn => {
-      let b;
-      btn.addEventListener('mouseenter', () => { b = btn.getBoundingClientRect(); });
-      btn.addEventListener('mousemove', e => {
-        b = b || btn.getBoundingClientRect();
-        btn.style.transform = `translate(${(e.clientX - b.left - b.width / 2) * 0.22}px, ${(e.clientY - b.top - b.height / 2) * 0.3}px)`;
-      });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-    });
-  }
-
-  /* Karten-Tilt */
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll('.brand-card').forEach(card => {
-      let b;
-      card.addEventListener('mouseenter', () => { b = card.getBoundingClientRect(); });
-      card.addEventListener('mousemove', e => {
-        b = b || card.getBoundingClientRect();
-        const px = (e.clientX - b.left) / b.width;
-        const py = (e.clientY - b.top) / b.height;
-        card.style.transform = `perspective(1400px) rotateX(${(0.5 - py) * 5}deg) rotateY(${(px - 0.5) * 5}deg) scale(1.008)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1400px)'; });
-    });
-  }
-
-  /* Hero-Parallax */
-  const heroMedia = document.querySelector('.hero-media');
-  if (heroMedia && !reduceMotion) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        heroMedia.style.transform = `translateY(${Math.min(window.scrollY, 400) * 0.12}px)`;
-        ticking = false;
-      });
-    }, { passive: true });
-  }
 </script>
 
 </body>
