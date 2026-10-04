@@ -422,6 +422,18 @@
     margin: 0;
   }
 
+  .fair--appointment {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 22px 24px;
+    margin-top: 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+
+  .fair--appointment .fair-date,
+  .fair--appointment .fair-go { display: none; }
+
   .pill {
     font-family: 'Inter', sans-serif;
     font-size: 0.66rem;
@@ -439,9 +451,9 @@
     border: 1px solid rgba(122, 79, 52, 0.3);
   }
 
-  .pill-todo {
-    background: var(--bg-alt);
-    color: var(--ink-faint);
+  .pill-appointment {
+    background: var(--bg);
+    color: var(--ink-soft);
     border: 1px solid var(--line);
   }
 
@@ -452,8 +464,6 @@
   }
 
   a.fair:hover .fair-go { color: var(--accent); transform: translateX(3px); }
-
-  .fair--todo .fair-date, .fair--todo .fair-body h3 { color: var(--ink-faint); }
 
   /* ===== Vertretungen ===== */
   .brands { background: var(--bg-alt); }
@@ -738,6 +748,10 @@
     .fair-year { grid-template-columns: 1fr; gap: 16px; }
     .fair-year-label { position: static; font-size: 1.7rem; }
     .fair { grid-template-columns: 68px 1fr; gap: 18px; padding: 20px 4px; }
+    .fair--appointment {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 20px;
+    }
     .fair-go { display: none; }
 
     .menu-toggle { display: flex; }
@@ -867,19 +881,15 @@
             <span class="m">Sep</span>
           </div>
           <div class="fair-body">
-            <h3>Showroom Novamobili <span class="pill pill-next">Als Nächstes</span></h3>
+            <h3>Showroom Novamobili</h3>
             <p>Battistella Company · Pieve di Soligo (TV), Italien</p>
           </div>
           <div class="fair-go" aria-hidden="true">→</div>
         </a>
-        <div class="fair fair--todo">
-          <div class="fair-date">
-            <span class="d">—</span>
-            <span class="m">Herbst</span>
-          </div>
+        <div class="fair fair--appointment">
           <div class="fair-body">
-            <h3>Regionale Verbandsmessen <span class="pill pill-todo">Termine folgen</span></h3>
-            <p>Nordrhein-Westfalen · Termine und Orte werden ergänzt</p>
+            <h3>Regionale Fachmessen <span class="pill pill-appointment">Auf Anfrage</span></h3>
+            <p>Gesprächstermine in Nordrhein-Westfalen nach Vereinbarung.</p>
           </div>
         </div>
       </div>
@@ -899,14 +909,10 @@
           </div>
           <div class="fair-go" aria-hidden="true">→</div>
         </a>
-        <div class="fair fair--todo">
-          <div class="fair-date">
-            <span class="d">—</span>
-            <span class="m">2027</span>
-          </div>
+        <div class="fair fair--appointment">
           <div class="fair-body">
-            <h3>Regionale Verbandsmessen <span class="pill pill-todo">Termine folgen</span></h3>
-            <p>Nordrhein-Westfalen · Termine und Orte werden ergänzt</p>
+            <h3>Regionale Fachmessen <span class="pill pill-appointment">Auf Anfrage</span></h3>
+            <p>Gesprächstermine in Nordrhein-Westfalen nach Vereinbarung.</p>
           </div>
         </div>
       </div>
